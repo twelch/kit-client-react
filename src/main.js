@@ -6,6 +6,11 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
+import { addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import es from 'react-intl/locale-data/es'
+import zh from 'react-intl/locale-data/zh'
+
 // ========================================================
 // Browser History Setup
 // ========================================================
@@ -34,6 +39,13 @@ if (__DEBUG__) {
     window.devToolsExtension.open()
   }
 }
+
+// ========================================================
+// Locale Data
+// ========================================================
+addLocaleData(en);
+addLocaleData(es);
+addLocaleData(zh);
 
 // ========================================================
 // Render Setup
@@ -74,6 +86,13 @@ if (__DEV__ && module.hot) {
 }
 
 // ========================================================
-// Go!
+// Go! loading intl polyfill if needed first (Safari)
 // ========================================================
-render()
+if (!global.Intl) {
+  require.ensure(['intl'], (requ) => {
+    requ('intl')
+    render()
+  }, 'intl-polyfill')
+} else {
+  render()
+}

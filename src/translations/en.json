@@ -1,0 +1,9 @@
+{
+  "header.apptitle": "Demo App",
+  "header.countertitle": "Counter",
+  "header.hometitle": "Home",
+  "home.welcome": "Welcome!",
+  "languageSelector.chinese": "Chinese",
+  "languageSelector.english": "English",
+  "languageSelector.spanish": "Spanish"
+}

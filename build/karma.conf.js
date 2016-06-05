@@ -17,7 +17,7 @@ const karmaConfig = {
     }
   ],
   singleRun: !argv.watch,
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'intl-shim'],
   reporters: ['mocha'],
   preprocessors: {
     [`${config.dir_test}/test-bundler.js`]: ['webpack']

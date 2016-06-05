@@ -1,26 +1,39 @@
 import React, { PropTypes } from 'react'
 import { Router } from 'react-router'
-import { Provider } from 'react-redux'
+import { connect, Provider } from 'react-redux'
+import { IntlProvider } from 'react-intl'
+import * as messages from 'translations/'
 
 class AppContainer extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     routes: PropTypes.object.isRequired,
     routerKey: PropTypes.number,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    locale: PropTypes.string.isRequired
   }
 
   render () {
     const { history, routes, routerKey, store } = this.props
 
+    const intlData = {
+      locale: this.props.locale || navigator.language || navigator.browserLanguage,
+      messages: messages[this.props.locale]
+    }
+
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
-          <Router history={history} children={routes} key={routerKey} />
+          <IntlProvider {...intlData}>
+            <Router history={history} children={routes} key={routerKey} />
+          </IntlProvider>
         </div>
       </Provider>
     )
   }
 }
 
-export default AppContainer
+function mapStateToProps (state) {
+  return { locale: state.locale }
+}
+export default connect(mapStateToProps)(AppContainer)
