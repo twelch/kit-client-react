@@ -89,10 +89,10 @@ if (__DEV__ && module.hot) {
 // Go! loading intl polyfill if needed first (Safari)
 // ========================================================
 if (!global.Intl) {
-  require.ensure(['intl'], (requ) => {
-    requ('intl')
+  require.ensure(['intl'], (require) => {
+    require('intl')
     render()
-  }, 'intl-polyfill')
+  }, 'intl')
 } else {
   render()
 }
