@@ -1,3 +1,9 @@
+# React Internationalization Testing
+
+Incorporates [React-intl](https://github.com/yahoo/react-intl) and [React-intl-translation-manager](https://github.com/GertjanReynaert/react-intl-translations-manager).  Polyfills Intl API if needed asynchronously (Safari).
+
+Added new npm command 'build:i18n:translations' to extract messages and update translations
+
 # React Redux Starter Kit
 
 [![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
