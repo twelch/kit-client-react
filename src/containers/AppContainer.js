@@ -17,7 +17,7 @@ class AppContainer extends React.Component {
     const { history, routes, routerKey, store } = this.props
 
     const intlData = {
-      locale: this.props.locale || navigator.language || navigator.browserLanguage,
+      locale: navigator.language || navigator.browserLanguage,
       messages: messages[this.props.locale]
     }
 
