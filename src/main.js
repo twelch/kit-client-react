@@ -43,9 +43,9 @@ if (__DEBUG__) {
 // ========================================================
 // Locale Data
 // ========================================================
-addLocaleData(en);
-addLocaleData(es);
-addLocaleData(zh);
+addLocaleData(en)
+addLocaleData(es)
+addLocaleData(zh)
 
 // ========================================================
 // Render Setup

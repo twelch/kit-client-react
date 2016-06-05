@@ -15,7 +15,7 @@ const messages = defineMessages({
     id: 'languageSelector.chinese',
     description: 'Select language',
     defaultMessage: 'Chinese'
-  }  
+  }
 })
 
 class LanguageSelector extends Component {

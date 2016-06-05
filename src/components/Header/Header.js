@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { IndexLink, Link } from 'react-router'
 import LanguageSelector from 'components/LanguageSelector'
 import { defineMessages, FormattedMessage } from 'react-intl'
@@ -22,7 +22,7 @@ const messages = defineMessages({
   }
 })
 
-export const Header = (props) => (
+const Header = (props) => (
   <div>
     <h1><FormattedMessage {...messages.apptitle} /></h1>
     <div>
@@ -37,5 +37,9 @@ export const Header = (props) => (
     </Link>
   </div>
 )
+
+Header.propTypes = {
+  localeChange: PropTypes.func.isRequired
+}
 
 export default Header
