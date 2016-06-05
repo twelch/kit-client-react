@@ -1,4 +1,7 @@
 {
+  "counter.counterlabel": "Contador",
+  "counter.doubleButton": "Duplica",
+  "counter.incrementButton": "Incrementas",
   "header.apptitle": "Aplicación de Demostración",
   "header.countertitle": "Contador",
   "header.hometitle": "Inicio",

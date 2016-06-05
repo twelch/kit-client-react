@@ -1,4 +1,7 @@
 {
+  "counter.counterlabel": "计数器",
+  "counter.doubleButton": "倍",
+  "counter.incrementButton": "增量",
   "header.apptitle": "示范应用",
   "header.countertitle": "计数器",
   "header.hometitle": "家",
