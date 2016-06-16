@@ -4,6 +4,7 @@
   "counter.incrementButton": "Increment",
   "header.apptitle": "Demo App",
   "header.countertitle": "Counter",
+  "header.headerlogin": "Login",
   "header.hometitle": "Home",
   "home.welcome": "Welcome!",
   "languageSelector.chinese": "Chinese",

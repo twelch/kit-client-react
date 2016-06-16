@@ -4,6 +4,7 @@
   "counter.incrementButton": "增量",
   "header.apptitle": "示范应用",
   "header.countertitle": "计数器",
+  "header.headerlogin": "Login",
   "header.hometitle": "家",
   "home.welcome": "欢迎！",
   "languageSelector.chinese": "中文 (chinese)",
