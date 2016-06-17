@@ -3,6 +3,7 @@ import { routerReducer as router } from 'react-router-redux'
 import {reducer as form} from 'redux-form'
 import locale from 'modules/locale'
 import auth from 'modules/auth'
+import sites from 'modules/sites'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -11,6 +12,7 @@ export const makeRootReducer = (asyncReducers) => {
     locale,
     form,
     auth,
+    sites,
     ...asyncReducers
   })
 }

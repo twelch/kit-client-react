@@ -9,8 +9,6 @@ export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGOUT_USER = 'LOGOUT_USER'
-export const FETCH_PROTECTED_DATA_REQUEST = 'FETCH_PROTECTED_DATA_REQUEST'
-export const RECEIVE_PROTECTED_DATA = 'RECEIVE_PROTECTED_DATA'
 
 // ------------------------------------
 // Actions
@@ -100,52 +98,11 @@ export function loginUser (username, password, redirect = '/') {
   }
 }
 
-export function receiveProtectedData (data) {
-  return {
-    type: RECEIVE_PROTECTED_DATA,
-    payload: {
-      data: data
-    }
-  }
-}
-
-export function fetchProtectedDataRequest () {
-  return {
-    type: FETCH_PROTECTED_DATA_REQUEST
-  }
-}
-
-export function fetchProtectedData (token) {
-  return (dispatch, state) => {
-    dispatch(fetchProtectedDataRequest())
-    return fetch('http://localhost:3000/getData/', {
-      credentials: 'include',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(checkHttpStatus)
-    .then(parseJSON)
-    .then(response => {
-      dispatch(receiveProtectedData(response.data))
-    })
-    .catch(error => {
-      if (error.response.status === 401) {
-        dispatch(loginUserFailure(error))
-        dispatch(push('/login'))
-      }
-    })
-  }
-}
-
 export const actions = {
   loginUserSuccess,
   loginUserFailure,
   loginUserRequest,
-  loginUser,
-  receiveProtectedData,
-  fetchProtectedDataRequest,
-  fetchProtectedData
+  loginUser
 }
 
 // ------------------------------------
@@ -153,7 +110,7 @@ export const actions = {
 // ------------------------------------
 
 // Auth Reducers
-const authInitialState = {
+const initialState = {
   token: null,
   user: null,
   isAuthenticated: false,
@@ -161,7 +118,7 @@ const authInitialState = {
   statusText: null
 }
 
-const authReducer = createReducer(authInitialState, {
+const authReducer = createReducer(initialState, {
   [LOGIN_USER_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       'isAuthenticating': true,
@@ -183,7 +140,7 @@ const authReducer = createReducer(authInitialState, {
       'isAuthenticated': false,
       'token': null,
       'user': null,
-      'statusText': `${payload.statusText}. Try again`
+      'statusText': `${payload.statusText}`
     })
   },
   [LOGOUT_USER]: (state, payload) => {
