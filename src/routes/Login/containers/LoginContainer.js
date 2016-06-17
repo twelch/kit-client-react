@@ -12,13 +12,16 @@ import LoginForm from 'forms/LoginForm'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapActionCreators = {
-  loginUser
+function login (values, dispatch) {
+  dispatch(loginUser(values.username, values.password))
 }
+
+const mapActionCreators = {}
 
 const mapStateToProps = (state) => ({
   isAuthenticating: state.auth.isAuthenticating,
-  statusText: state.auth.statusText
+  statusText: state.auth.statusText,
+  onSubmit: login
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

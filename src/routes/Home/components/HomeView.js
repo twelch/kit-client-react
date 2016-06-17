@@ -1,24 +1,33 @@
-import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import classes from './HomeView.scss'
-import { defineMessages, FormattedMessage } from 'react-intl'
+import React, { PropTypes } from 'react'
+import LoginContainer from 'routes/Login/containers/LoginContainer'
+import SiteMenu from './SiteMenu'
 
-const messages = defineMessages({
-  welcome: {
-    id: 'home.welcome',
-    description: 'Welcome message',
-    defaultMessage: 'Welcome!'
+const styles = {
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
   }
-})
+}
 
-export const HomeView = () => (
-  <div>
-    <h4><FormattedMessage {...messages.welcome} /></h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className={classes.duck}
-      src={DuckImage} />
-  </div>
-)
+const HomeView = (props, context) => {
+  let CurComponent = null
+  if (props.isAuthenticated) {
+    CurComponent = <SiteMenu logout={props.logoutAndRedirect} />
+  } else {
+    CurComponent = <LoginContainer />
+  }
+
+  return (
+    <div style={styles.root} >
+      {CurComponent}
+    </div>
+  )
+}
+
+HomeView.propTypes = {
+  logoutAndRedirect: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+}
 
 export default HomeView

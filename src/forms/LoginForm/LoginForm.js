@@ -1,66 +1,57 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { TextField, RaisedButton } from 'material-ui'
+import Paper from 'material-ui/Paper'
 import validate from './validate'
 
 export const fields = [ 'username', 'password' ]
 
-type Props = {
-  handleSubmit: Function,
-  fields: Object
-}
-
 class Login extends React.Component {
-  props: Props;
-
-  defaultProps = {
-    fields: {}
-  }
-
-  login (values, dispatch) {
-    this.props.loginUser(values.username, values.password)
-  }
 
   render () {
     const { fields: { username, password }, statusText, handleSubmit, isAuthenticating } = this.props
-
     const style = {
       bigError: {
-        fontSize: '16px',
-        lineHeight: '16px',
-        color: 'rgb(244, 67, 54)',
-        height: 30
+        fontSize: '14px',
+        lineHeight: '14px',
+        color: '#F5A623'
+      },
+      container: {
+        padding: 20
       }
     }
 
     return (
-      <form onSubmit={handleSubmit(this.login.bind(this))}>
-        <div>
+      <Paper style={style.container} zDepth={1} rounded={false} >
+        <form onSubmit={handleSubmit}>
+          <div style={style.bigError}>{statusText}</div>
+          <div>
+            <div>
+              <TextField
+                {...username}
+                hintText='Username'
+                errorText={username.touched && username.error && <div>{username.error}</div>} />
+            </div>
+          </div>
           <div>
             <TextField
-              {...username}
-              hintText='Username'
-              errorText={username.touched && username.error && <div>{username.error}</div>} />
+              {...password}
+              type='password'
+              hintText='Password'
+              errorText={password.touched && password.error && <div>{password.error}</div>} />
           </div>
-        </div>
-        <div>
-          <TextField
-            {...password}
-            type='password'
-            hintText='Password'
-            errorText={password.touched && password.error && <div>{password.error}</div>} />
-        </div>
-
-        <div style={style.bigError}>{statusText}</div>
-        <div>
-          <RaisedButton
-            type='submit'
-            disabled={isAuthenticating}
-            onTouchTap={this.handleTouchTap}
-            label='Log In'
-          />
-        </div>
-      </form>
+          <div>
+            <RaisedButton
+              primary
+              type='submit'
+              disabled={isAuthenticating}
+              onTouchTap={this.handleTouchTap}
+              label='Sign In'
+              style={{marginTop: 20, width: '100%'}}
+            />
+          </div>
+        </form>
+      </Paper>
     )
   }
 }
@@ -68,7 +59,6 @@ class Login extends React.Component {
 Login.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  loginUser: PropTypes.func.isRequired,
   statusText: PropTypes.string,
   isAuthenticating: PropTypes.bool.isRequired
 }
