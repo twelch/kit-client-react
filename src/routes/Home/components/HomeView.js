@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import LoginContainer from 'routes/Login/containers/LoginContainer'
+import LoginContainer from 'containers/LoginContainer'
 import SiteMenu from './SiteMenu'
 
 const styles = {

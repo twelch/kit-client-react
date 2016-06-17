@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl'
 import * as messages from 'translations/'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { loginUserSuccess } from 'routes/Login/modules/auth'
+import { loginUserSuccess } from 'modules/auth'
 
 class AppContainer extends React.Component {
   static propTypes = {

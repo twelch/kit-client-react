@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import HomeView from '../components/HomeView'
-import { logoutAndRedirect } from 'routes/Login/modules/auth'
+import { logoutAndRedirect } from 'modules/auth'
 
 const mapActionCreators = {
   logoutAndRedirect
