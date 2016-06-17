@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import LoginContainer from 'containers/LoginContainer'
-import SiteMenu from './SiteMenu'
+import LoginForm from 'forms/LoginForm'
+import SiteMenu from '../containers/SiteMenuContainer'
 
 const styles = {
   root: {
@@ -15,7 +15,7 @@ const HomeView = (props, context) => {
   if (props.isAuthenticated) {
     CurComponent = <SiteMenu logout={props.logoutAndRedirect} />
   } else {
-    CurComponent = <LoginContainer />
+    CurComponent = <LoginForm />
   }
 
   return (
