@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import LoginForm from 'forms/LoginForm'
 import SiteMenu from '../containers/SiteMenuContainer'
-import { requireAuthentication } from 'components/AuthenticatedComponent/AuthenticatedComponent'
 
 const styles = {
   root: {
@@ -12,12 +11,10 @@ const styles = {
 }
 
 const HomeView = (props, context) => {
-  let CurComponent = null
-
   return (
     <div style={styles.root} >
-      {props.isAuthenticated 
-        ? <SiteMenu /> 
+      {props.isAuthenticated
+        ? <SiteMenu />
         : <LoginForm />
       }
     </div>

@@ -10,7 +10,7 @@ export const createRoutes = (store) => ({
   component: CoreLayout,
   indexRoute: Home,
   childRoutes: [
-    //CounterRoute(store)
+    // CounterRoute(store)
   ]
 })
 

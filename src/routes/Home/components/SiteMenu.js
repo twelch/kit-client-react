@@ -5,11 +5,14 @@ import {List, ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
 
-
 export class SiteMenu extends React.Component {
 
   static propTypes = {
-    logout: PropTypes.func.isRequired
+    token: PropTypes.string.isRequired,
+    logout: PropTypes.func.isRequired,
+    fetchSites: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    sites: PropTypes.array.isRequired
   }
 
   componentWillMount () {
@@ -21,7 +24,7 @@ export class SiteMenu extends React.Component {
     this.props.fetchSites(token)
   }
 
-  render() {
+  render () {
     const { logout, isFetching, sites } = this.props
 
     const styles = {
@@ -46,11 +49,12 @@ export class SiteMenu extends React.Component {
       CurList = <p>Loading sites...</p>
     } else {
       const siteItems = Object.keys(sites || {}).map((index) => {
+        const site = sites[index]
         return (<ListItem
-          key={index+1}
+          key={index + 1}
           leftAvatar={<Avatar icon={<PinDrop />} />}
-          primaryText={sites[index].name}
-          secondaryText={sites[index].description}
+          primaryText={site.name}
+          secondaryText={site.description}
           style={styles.list}
         />)
       })
@@ -74,7 +78,7 @@ export class SiteMenu extends React.Component {
                 onTouchTap={logout} />
             </ToolbarGroup>
           </Toolbar>
-          {CurList}          
+          {CurList}
         </div>
       </div>
     )

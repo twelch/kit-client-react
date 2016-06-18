@@ -70,12 +70,12 @@ const reducer = createReducer(initialState, {
     return Object.assign({}, state, {
       data: payload.data,
       isFetching: false
-    });
+    })
   },
   [FETCH_SITES_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isFetching: true
-    });
+    })
   }
 })
 
