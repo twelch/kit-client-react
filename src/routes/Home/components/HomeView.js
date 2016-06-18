@@ -22,7 +22,6 @@ const HomeView = (props, context) => {
 }
 
 HomeView.propTypes = {
-  logoutAndRedirect: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 }
 

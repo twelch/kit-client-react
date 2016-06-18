@@ -12,7 +12,7 @@ export class SiteMenu extends React.Component {
     logout: PropTypes.func.isRequired,
     fetchSites: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    sites: PropTypes.array.isRequired
+    sites: PropTypes.object
   }
 
   componentWillMount () {
