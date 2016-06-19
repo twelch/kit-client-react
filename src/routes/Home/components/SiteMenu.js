@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
-import {List, ListItem} from 'material-ui/List'
+import {List, ListItem, MakeSelectable} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
+
+const SelectableList = MakeSelectable(List)
 
 export class SiteMenu extends React.Component {
 
@@ -12,7 +14,8 @@ export class SiteMenu extends React.Component {
     logout: PropTypes.func.isRequired,
     fetchSites: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    sites: PropTypes.object
+    sites: PropTypes.object,
+    selectSite: PropTypes.func.isRequired
   }
 
   componentWillMount () {
@@ -22,6 +25,10 @@ export class SiteMenu extends React.Component {
   fetchData () {
     let token = this.props.token
     this.props.fetchSites(token)
+  }
+
+  siteSelected (event, siteid) {
+    this.props.selectSite(siteid)
   }
 
   render () {
@@ -52,6 +59,7 @@ export class SiteMenu extends React.Component {
         const site = sites[index]
         return (<ListItem
           key={index + 1}
+          value={site.id}
           leftAvatar={<Avatar icon={<PinDrop />} />}
           primaryText={site.name}
           secondaryText={site.description}
@@ -60,9 +68,9 @@ export class SiteMenu extends React.Component {
       })
       CurList = (
         <div style={styles.listcontainer}>
-          <List>
+          <SelectableList onChange={this.siteSelected.bind(this)}>
             {siteItems}
-          </List>
+          </SelectableList>
         </div>
       )
     }

@@ -7,6 +7,7 @@ import { loginUserFailure } from 'modules/auth'
 // ------------------------------------
 export const FETCH_SITES_REQUEST = 'FETCH_SITES_REQUEST'
 export const RECEIVE_SITES = 'RECEIVE_SITES'
+export const SELECT_SITE = 'SELECT_SITE'
 
 // ------------------------------------
 // Actions
@@ -49,10 +50,27 @@ export function fetchSites (token) {
   }
 }
 
+export function selectSite (siteid) {
+  return (dispatch, state) => {
+    dispatch(setSite(siteid))
+    dispatch(push('/sites/'+siteid))
+  }
+}
+
+export function setSite (siteid) {
+  return {
+    type: SELECT_SITE,
+    payload: {
+      curSite: siteid
+    }
+  }
+}
+
 export const actions = {
   receiveSites,
   fetchSitesRequest,
-  fetchSites
+  fetchSites,
+  selectSite
 }
 
 // ------------------------------------
@@ -62,7 +80,8 @@ export const actions = {
 // Auth Reducers
 const initialState = {
   data: null,
-  isFetching: false
+  isFetching: false,
+  curSite: null
 }
 
 const reducer = createReducer(initialState, {
@@ -75,6 +94,11 @@ const reducer = createReducer(initialState, {
   [FETCH_SITES_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isFetching: true
+    })
+  },
+  [SELECT_SITE]: (state, payload) => {
+    return Object.assign({}, state, {
+      curSite: payload.curSite
     })
   }
 })
