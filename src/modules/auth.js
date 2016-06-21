@@ -56,7 +56,7 @@ export function logoutAndRedirect () {
   }
 }
 
-export function loginUser (username, password, redirect = '/') {
+export function loginUser (username, password, redirect = '/sites') {
   return function (dispatch) {
     dispatch(loginUserRequest())
     return fetch('/api/users/authenticate', {

@@ -10,13 +10,13 @@ export const RECEIVE_SITES = 'RECEIVE_SITES'
 export const SELECT_SITE = 'SELECT_SITE'
 
 // ------------------------------------
-// Actions
+// Actions and Action Creators
 // ------------------------------------
-export function receiveSites (data) {
+export function receiveSites (configs) {
   return {
     type: RECEIVE_SITES,
     payload: {
-      data: data
+      configs
     }
   }
 }
@@ -52,17 +52,13 @@ export function fetchSites (token) {
 
 export function selectSite (siteid) {
   return (dispatch, state) => {
-    dispatch(setSite(siteid))
     dispatch(push('/sites/'+siteid))
   }
 }
 
-export function setSite (siteid) {
-  return {
-    type: SELECT_SITE,
-    payload: {
-      curSite: siteid
-    }
+export function selectView (siteid, viewid) {
+  return (dispatch, state) => {
+    dispatch(push('/sites/'+siteid+'/views/'+viewid))
   }
 }
 
@@ -79,26 +75,20 @@ export const actions = {
 
 // Auth Reducers
 const initialState = {
-  data: null,
-  isFetching: false,
-  curSite: null
+  configs: null,
+  isFetching: false
 }
 
 const reducer = createReducer(initialState, {
   [RECEIVE_SITES]: (state, payload) => {
     return Object.assign({}, state, {
-      data: payload.data,
+      configs: payload.configs,
       isFetching: false
     })
   },
   [FETCH_SITES_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isFetching: true
-    })
-  },
-  [SELECT_SITE]: (state, payload) => {
-    return Object.assign({}, state, {
-      curSite: payload.curSite
     })
   }
 })

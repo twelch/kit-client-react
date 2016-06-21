@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import LoginForm from 'forms/LoginForm'
-import SiteMenu from '../containers/SiteMenuContainer'
+import LoginForm from 'forms/LoginForm/LoginContainer'
+import { push } from 'react-router-redux'
 
 const styles = {
   root: {
@@ -10,19 +10,33 @@ const styles = {
   }
 }
 
-const HomeView = (props, context) => {
-  return (
-    <div style={styles.root} >
-      {props.isAuthenticated
-        ? <SiteMenu />
-        : <LoginForm />
-      }
-    </div>
-  )
-}
+class HomeView extends React.Component {
 
-HomeView.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+  }
+
+  componentWillMount () {
+    this.checkAuth(this.props.isAuthenticated)
+  }
+
+  checkAuth (isAuthenticated) {
+    if (isAuthenticated) {
+      this.props.dispatch(push('/sites'))
+    }
+  }
+
+  render () {
+    const { isAuthenticated } = this.props
+    return (
+      <div style={styles.root} >
+        {!isAuthenticated
+          ? <LoginForm />
+          : null
+        }      
+      </div>
+    )
+  }
 }
 
 export default HomeView
