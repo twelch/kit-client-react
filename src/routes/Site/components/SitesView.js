@@ -1,6 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import SitesMenu from '../containers/SitesMenuContainer'
-import { makeSiteComponent } from '../components/SiteComponent'
 
 const styles = {
   root: {
@@ -17,7 +16,5 @@ const SitesView = (props, context) => {
     </div>
   )
 }
-
-SitesView.propTypes = {}
 
 export default SitesView

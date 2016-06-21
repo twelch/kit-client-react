@@ -13,7 +13,8 @@ const styles = {
 class HomeView extends React.Component {
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
 
   componentWillMount () {
@@ -33,7 +34,7 @@ class HomeView extends React.Component {
         {!isAuthenticated
           ? <LoginForm />
           : null
-        }      
+        }
       </div>
     )
   }

@@ -4,13 +4,12 @@ import { fetchSites } from 'modules/sites'
 
 /*
  * A SiteComponent is a component that works with an individual site
- * It requires current siteid to be set and its state available. If it 
- * is not then it will trigger the necessary actions to load before continuing.  
+ * It requires current siteid to be set and its state available. If it
+ * is not then it will trigger the necessary actions to load before continuing.
  * Authentication is required and should be ensured beforehand
  *
  * Use makeSiteComponent to turn a component into a higher-order SiteComponent
  */
-import { push } from 'react-router-redux'
 
 export function makeSiteComponent (Component) {
   class SiteComponent extends React.Component {
@@ -18,7 +17,8 @@ export function makeSiteComponent (Component) {
     static propTypes = {
       token: PropTypes.string,
       isAuthenticated: PropTypes.bool.isRequired,
-      sites: PropTypes.object      
+      sites: PropTypes.object,
+      fetchSites: PropTypes.func.isRequired
     }
 
     componentWillMount () {
@@ -26,7 +26,7 @@ export function makeSiteComponent (Component) {
     }
 
     checkSite (sites) {
-      const {isAuthenticated, params, fetchSites} = this.props
+      const {isAuthenticated, fetchSites} = this.props
 
       // Check authenticated and site provided
       if (!isAuthenticated) {
@@ -40,16 +40,16 @@ export function makeSiteComponent (Component) {
     }
 
     render () {
-      const {params, sites} = this.props
+      const {sites} = this.props
 
       return (
         <div>
-        {sites 
+        {sites
           ? <Component {...this.props} />
           : null
         }
         </div>
-      )      
+      )
     }
   }
 

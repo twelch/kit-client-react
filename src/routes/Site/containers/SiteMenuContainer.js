@@ -10,7 +10,7 @@ const mapActionCreators = {
 
 const mapStateToProps = (state) => ({
   token: state.auth.token,
-  isFetching: state.sites.isFetching,  
+  isFetching: state.sites.isFetching,
   sites: state.sites.configs
 })
 

@@ -19,13 +19,10 @@ export class SitesMenu extends React.Component {
     selectSite: PropTypes.func.isRequired
   }
 
-  componentWillMount () {
-    //this.fetchData()
-  }
-
-  fetchData () {
-    let token = this.props.token
-    this.props.fetchSites(token)
+  constructor () {
+    super()
+    // Set handler scope as es6 doesn't do this for us
+    this.viewSelected = this.viewSelected.bind(this)
   }
 
   siteSelected (event, siteid) {
@@ -69,7 +66,7 @@ export class SitesMenu extends React.Component {
       })
       CurList = (
         <div style={styles.listcontainer}>
-          <SelectableList onChange={this.siteSelected.bind(this)}>
+          <SelectableList onChange={this.siteSelected}>
             {siteItems}
           </SelectableList>
         </div>

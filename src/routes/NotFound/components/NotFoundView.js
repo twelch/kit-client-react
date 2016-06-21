@@ -1,10 +1,5 @@
 import React from 'react'
-import { defineMessages, FormattedMessage, FormattedNumber } from 'react-intl'
 import NotFound from 'components/NotFound'
-
-const messages = defineMessages({
-
-})
 
 const styles = {
   root: {

@@ -4,7 +4,7 @@ const styles = {
   container: {
     width: 360,
     textAlign: 'center'
-  },
+  }
 }
 
 const NotFound = (props) => {

@@ -18,6 +18,12 @@ export class SiteMenu extends React.Component {
     params: PropTypes.object.isRequired
   }
 
+  constructor () {
+    super()
+    // Set handler scope as es6 doesn't do this for us
+    this.viewSelected = this.viewSelected.bind(this)
+  }
+
   viewSelected (event, viewid) {
     this.props.selectView(this.props.params.siteid, viewid)
   }
@@ -56,7 +62,7 @@ export class SiteMenu extends React.Component {
     })
     const CurList = (
       <div style={styles.listcontainer}>
-        <SelectableList onChange={this.viewSelected.bind(this)}>
+        <SelectableList onChange={this.viewSelected}>
           {viewItems}
         </SelectableList>
       </div>

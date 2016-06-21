@@ -52,13 +52,13 @@ export function fetchSites (token) {
 
 export function selectSite (siteid) {
   return (dispatch, state) => {
-    dispatch(push('/sites/'+siteid))
+    dispatch(push('/sites/' + siteid))
   }
 }
 
 export function selectView (siteid, viewid) {
   return (dispatch, state) => {
-    dispatch(push('/sites/'+siteid+'/views/'+viewid))
+    dispatch(push('/sites/' + siteid + '/views/' + viewid))
   }
 }
 

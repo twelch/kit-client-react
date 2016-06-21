@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import HomeView from '../components/HomeView'
 
-const mapActionCreators = {}
+// const mapActionCreators = {}
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
