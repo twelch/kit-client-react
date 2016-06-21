@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar'
 import {List, ListItem, MakeSelectable} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
@@ -12,7 +11,6 @@ export class SiteMenu extends React.Component {
 
   static propTypes = {
     token: PropTypes.string.isRequired,
-    logout: PropTypes.func.isRequired,
     sites: PropTypes.object,
     selectView: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
@@ -29,15 +27,14 @@ export class SiteMenu extends React.Component {
   }
 
   render () {
-    const { logout, sites, params } = this.props
+    const { sites, params } = this.props
     const siteid = params.siteid
-    const views = sites[siteid].views
+    const site = sites[siteid]
+    const views = site.views
 
     const styles = {
       sites: {
         float: 'left',
-        marginBottom: 24,
-        marginRight: 24,
         width: 360
       },
       listcontainer: {
@@ -72,12 +69,7 @@ export class SiteMenu extends React.Component {
       <div style={styles.root}>
         <div style={styles.sites}>
           <Toolbar>
-            <ToolbarTitle text='Views' />
-            <ToolbarGroup lastChild >
-              <FlatButton
-                label='Sign Out'
-                onTouchTap={logout} />
-            </ToolbarGroup>
+            <ToolbarTitle text={site.name} />
           </Toolbar>
           {CurList}
         </div>

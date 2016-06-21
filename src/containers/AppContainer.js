@@ -7,6 +7,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { loginUserSuccess } from 'modules/auth'
 
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+injectTapEventPlugin()
+
 class AppContainer extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,

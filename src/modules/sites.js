@@ -10,7 +10,7 @@ export const RECEIVE_SITES = 'RECEIVE_SITES'
 export const SELECT_SITE = 'SELECT_SITE'
 
 // ------------------------------------
-// Actions and Action Creators
+// Actions
 // ------------------------------------
 export function receiveSites (configs) {
   return {
@@ -50,6 +50,12 @@ export function fetchSites (token) {
   }
 }
 
+export function showSites () {
+  return (dispatch, state) => {
+    dispatch(push('/sites'))
+  }
+}
+
 export function selectSite (siteid) {
   return (dispatch, state) => {
     dispatch(push('/sites/' + siteid))
@@ -66,7 +72,9 @@ export const actions = {
   receiveSites,
   fetchSitesRequest,
   fetchSites,
-  selectSite
+  showSites,
+  selectSite,
+  selectView
 }
 
 // ------------------------------------

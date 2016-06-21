@@ -7,6 +7,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column'
+  },
+  header: {
+    fontSize: '1.75rem',
+    fontFamily: 'Roboto, sans-serif',
+    margin: '1rem 0 2rem 0'
   }
 }
 

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar'
 import {List, ListItem, MakeSelectable} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
@@ -12,17 +11,17 @@ export class SitesMenu extends React.Component {
 
   static propTypes = {
     token: PropTypes.string.isRequired,
-    logout: PropTypes.func.isRequired,
     fetchSites: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     sites: PropTypes.object,
-    selectSite: PropTypes.func.isRequired
+    selectSite: PropTypes.func.isRequired,
+    logou: PropTypes.func.isRequired
   }
 
   constructor () {
     super()
     // Set handler scope as es6 doesn't do this for us
-    this.viewSelected = this.viewSelected.bind(this)
+    this.siteSelected = this.siteSelected.bind(this)
   }
 
   siteSelected (event, siteid) {
@@ -30,13 +29,11 @@ export class SitesMenu extends React.Component {
   }
 
   render () {
-    const { logout, isFetching, sites } = this.props
+    const { isFetching, sites } = this.props
 
     const styles = {
       sites: {
         float: 'left',
-        marginBottom: 24,
-        marginRight: 24,
         width: 360
       },
       listcontainer: {
@@ -78,11 +75,6 @@ export class SitesMenu extends React.Component {
         <div style={styles.sites}>
           <Toolbar>
             <ToolbarTitle text='Sites' />
-            <ToolbarGroup lastChild >
-              <FlatButton
-                label='Sign Out'
-                onTouchTap={logout} />
-            </ToolbarGroup>
           </Toolbar>
           {CurList}
         </div>
