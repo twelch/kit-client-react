@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Sidebar from '../../components/Sidebar'
 import { openSidebar, closeSidebar, setSidebar, toggleSidebar } from 'modules/sidebar'

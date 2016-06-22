@@ -28,7 +28,8 @@ export class Sidebar extends React.Component {
     showSites: React.PropTypes.func.isRequired,
     logout: React.PropTypes.func.isRequired,
     localeChange: React.PropTypes.func.isRequired,
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    closeSidebar: React.PropTypes.func.isRequired
   }
 
   constructor () {
@@ -47,7 +48,7 @@ export class Sidebar extends React.Component {
   signOut () {
     this.props.logout()
     this.props.closeSidebar()
-  } 
+  }
 
   changeLanguage (locale) {
     this.props.localeChange(locale)
@@ -93,27 +94,26 @@ export class Sidebar extends React.Component {
           primaryText='Language'
           rightIcon={<ArrowDropRight />}
           menuItems={[
-            <MenuItem 
-              id='en' 
-              style={styles.list} 
+            <MenuItem
+              id='en'
+              style={styles.list}
               primaryText={formatMessage(messages.english)}
-              insetChildren
-              onTouchTap={() => this.changeLanguage('en')}
+              onTouchTap={() => this.changeLanguage('en')} // eslint-disable-line react/jsx-no-bind
               insetChildren
               checked={locale === 'en'} />,
-            <MenuItem 
-              id='zh' 
-              style={styles.list} 
+            <MenuItem
+              id='zh'
+              style={styles.list}
               primaryText={formatMessage(messages.chinese)}
-              onTouchTap={() => this.changeLanguage('zh')}
-              insetChildren 
+              onTouchTap={() => this.changeLanguage('zh')} // eslint-disable-line react/jsx-no-bind
+              insetChildren
               checked={locale === 'zh'} />,
-            <MenuItem 
-              id='es' 
-              style={styles.list} 
+            <MenuItem
+              id='es'
+              style={styles.list}
               primaryText={formatMessage(messages.spanish)}
-              onTouchTap={() => this.changeLanguage('es')}
-              insetChildren 
+              onTouchTap={() => this.changeLanguage('es')} // eslint-disable-line react/jsx-no-bind
+              insetChildren
               checked={locale === 'es'} />
           ]}
         />

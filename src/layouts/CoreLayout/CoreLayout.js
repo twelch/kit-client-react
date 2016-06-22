@@ -9,7 +9,10 @@ import { toggleSidebar, setSidebar } from 'modules/sidebar'
 class CoreLayout extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.element.isRequired
+    children: React.PropTypes.element.isRequired,
+    toggleSidebar: React.PropTypes.func.isRequired,
+    sidebar: React.PropTypes.bool.isRequired,
+    setSidebar: React.PropTypes.func.isRequired
   }
 
   render () {
@@ -36,7 +39,7 @@ const mapActionCreators = {
 }
 
 const mapStateToProps = (state, props) => ({
-  sidebar: state.sidebar  
+  sidebar: state.sidebar
 })
 
 export default connect(mapStateToProps, mapActionCreators)(CoreLayout)

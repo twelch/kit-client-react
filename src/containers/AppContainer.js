@@ -16,7 +16,8 @@ class AppContainer extends React.Component {
     routes: PropTypes.object.isRequired,
     routerKey: PropTypes.number,
     store: PropTypes.object.isRequired,
-    locale: PropTypes.string.isRequired
+    locale: PropTypes.string.isRequired,
+    auth: PropTypes.object.isRequired
   }
 
   render () {
@@ -52,7 +53,7 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps (state) {
-  return { 
+  return {
     locale: state.locale,
     auth: state.auth
   }

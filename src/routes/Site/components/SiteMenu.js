@@ -11,9 +11,9 @@ export class SiteMenu extends React.Component {
 
   static propTypes = {
     token: PropTypes.string.isRequired,
-    site: PropTypes.object,    
+    site: PropTypes.object,
     selectView: PropTypes.func.isRequired,
-    params: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired
   }
 
   constructor () {
@@ -27,8 +27,7 @@ export class SiteMenu extends React.Component {
   }
 
   render () {
-    const { site, params } = this.props
-    const siteid = params.siteid
+    const { site } = this.props
     const views = site.views
 
     const styles = {
