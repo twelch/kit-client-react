@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Sidebar from '../../components/Sidebar'
 import { openSidebar, closeSidebar, setSidebar, toggleSidebar } from 'modules/sidebar'
 import { showSites } from 'modules/sites'
 import { logout } from 'modules/auth'
+import { localeChange } from 'modules/locale'
+import {injectIntl} from 'react-intl'
 
 const mapStateToProps = (state) => ({})
 
@@ -14,10 +15,13 @@ const mapActionCreators = {
   setSidebar,
   toggleSidebar,
   showSites,
-  logout
+  logout,
+  localeChange
 }
+
+let IntlSidebar = injectIntl(Sidebar)
 
 export default connect(
   mapStateToProps,
   mapActionCreators
-)(Sidebar)
+)(IntlSidebar)

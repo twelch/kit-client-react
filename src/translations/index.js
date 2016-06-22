@@ -1,3 +1,10 @@
-export { default as en } from './en.json'
-export { default as es } from './es.json'
-export { default as zh } from './zh.json'
+import en from './en.json'
+import es from './es.json'
+import zh from './zh.json'
+
+export const translations = {
+  en,
+  'en-US': en, // Reuse en translations for multiple locales
+  es,
+  zh
+}

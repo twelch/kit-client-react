@@ -6,7 +6,6 @@ import * as messages from 'translations/'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { loginUserSuccess } from 'modules/auth'
-
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 injectTapEventPlugin()
@@ -21,16 +20,16 @@ class AppContainer extends React.Component {
   }
 
   render () {
-    const { history, routes, routerKey, store } = this.props
+    const { auth, history, routes, routerKey, store } = this.props
 
     const intlData = {
       locale: this.props.locale,
-      messages: messages[this.props.locale]
+      messages: messages.translations[this.props.locale]
     }
 
     let token = localStorage.getItem('token')
     let user = JSON.parse(localStorage.getItem('user'))
-    if (token !== 'undefined' && token !== null && user !== 'undefined' && user !== null) {
+    if (!auth['isAuthenticated'] && token !== 'undefined' && token !== null && user !== 'undefined' && user !== null) {
       // If token expiration is more than one hour from now keep using
       const hourFromNowSec = Math.floor(Date.now() / 1000) + 3600
       if (user.exp > hourFromNowSec) {
@@ -53,6 +52,9 @@ class AppContainer extends React.Component {
 }
 
 function mapStateToProps (state) {
-  return { locale: state.locale }
+  return { 
+    locale: state.locale,
+    auth: state.auth
+  }
 }
 export default connect(mapStateToProps)(AppContainer)
