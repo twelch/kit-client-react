@@ -4,6 +4,7 @@ import {reducer as form} from 'redux-form'
 import locale from 'modules/locale'
 import auth from 'modules/auth'
 import sites from 'modules/sites'
+import sidebar from 'modules/sidebar'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -13,6 +14,7 @@ export const makeRootReducer = (asyncReducers) => {
     form,
     auth,
     sites,
+    sidebar,
     ...asyncReducers
   })
 }
