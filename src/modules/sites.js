@@ -1,6 +1,7 @@
 import { checkHttpStatus, parseJSON, createReducer } from 'utils'
 import { push } from 'react-router-redux'
 import { loginUserFailure } from 'modules/auth'
+import { createSelector } from 'reselect'
 
 // ------------------------------------
 // Constants
@@ -75,6 +76,25 @@ export const actions = {
   showSites,
   selectSite,
   selectView
+}
+
+// ------------------------------------
+// Selectors - calculate useful values from state
+// ------------------------------------
+
+export const getCurSite = (state, props) => {
+  if (!state.sites ||
+      !state.sites.configs ||
+      !props.params.siteid)
+    return null
+  let site = null
+  try {
+    site = state.sites.configs[props.params.siteid]
+  }
+  catch (e) {
+    return null
+  }
+  return site
 }
 
 // ------------------------------------

@@ -1,12 +1,10 @@
 import { connect } from 'react-redux'
 import SitesMenu from '../components/SitesMenu'
 import { fetchSites, selectSite } from 'modules/sites'
-import { logout } from 'modules/auth'
 
 const mapActionCreators = {
   fetchSites,
-  selectSite,
-  logout
+  selectSite
 }
 
 const mapStateToProps = (state) => ({

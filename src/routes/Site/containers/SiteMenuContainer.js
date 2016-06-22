@@ -1,17 +1,15 @@
 import { connect } from 'react-redux'
 import SiteMenu from '../components/SiteMenu'
-import { selectView } from 'modules/sites'
-import { logout } from 'modules/auth'
+import { getCurSite, selectView } from 'modules/sites'
 
 const mapActionCreators = {
-  selectView,
-  logout
+  selectView
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   token: state.auth.token,
   isFetching: state.sites.isFetching,
-  sites: state.sites.configs
+  site: getCurSite(state, props) // Selector
 })
 
 export default connect(mapStateToProps, mapActionCreators)(SiteMenu)

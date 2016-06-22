@@ -15,8 +15,7 @@ class CoreLayout extends React.Component {
   static propTypes = {
     children: React.PropTypes.element.isRequired,
     logout: React.PropTypes.func.isRequired,
-    showSites: React.PropTypes.func.isRequired,
-    toggleSettings: React.PropTypes.func.isRequired
+    showSites: React.PropTypes.func.isRequired
   }
 
   constructor () {
@@ -26,7 +25,6 @@ class CoreLayout extends React.Component {
     this.toggleDrawer = this.toggleDrawer.bind(this)
     this.setDrawer = this.setDrawer.bind(this)
     this.goSites = this.goSites.bind(this)
-    this.toggleSettings = this.toggleSettings.bind(this)
     this.signOut = this.signOut.bind(this)
   }
 
@@ -43,8 +41,7 @@ class CoreLayout extends React.Component {
     this.setDrawer(false)
   }
 
-  toggleSettings () {
-    this.props.toggleSettings()
+  toggleSettings () {    
     this.setDrawer(false)
   }
 

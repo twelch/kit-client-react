@@ -14,8 +14,7 @@ export class SitesMenu extends React.Component {
     fetchSites: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     sites: PropTypes.object,
-    selectSite: PropTypes.func.isRequired,
-    logou: PropTypes.func.isRequired
+    selectSite: PropTypes.func.isRequired
   }
 
   constructor () {
