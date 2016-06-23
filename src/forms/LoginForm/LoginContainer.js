@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { loginUser } from 'modules/auth'
 import LoginForm from './LoginForm'
+import {injectIntl} from 'react-intl'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -15,8 +16,9 @@ const mapActionCreators = {}
 
 const mapStateToProps = (state) => ({
   isAuthenticating: state.auth.isAuthenticating,
-  statusText: state.auth.statusText,
+  errorText: state.auth.errorText,
+  loggedOutText: state.auth.loggedOutText,
   onSubmit: login
 })
 
-export default connect(mapStateToProps, mapActionCreators)(LoginForm)
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(LoginForm))

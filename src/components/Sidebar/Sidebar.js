@@ -20,6 +20,36 @@ const messages = defineMessages({
     id: 'languageSelector.chinese',
     description: 'Select language',
     defaultMessage: 'Chinese'
+  },
+  siteslabel: {
+    id: 'sidebar.siteslabel',
+    description: 'Sites label in sidebar menu',
+    defaultMessage: 'Sites'
+  },  
+  viewslabel: {
+    id: 'sidebar.viewslabel',
+    description: 'Views label in sidebar menu',
+    defaultMessage: 'Views'
+  },
+  languagelabel: {
+    id: 'sidebar.language',
+    description: 'Language label in sidebar menu',
+    defaultMessage: 'Language'
+  },
+  settingslabel: {
+    id: 'sidebar.settings',
+    description: 'Settings label in sidebar menu',
+    defaultMessage: 'Settings'
+  },
+  signoutlabel: {
+    id: 'sidebar.signout',
+    description: 'Sign Out label in sidebar menu',
+    defaultMessage: 'Sign Out'
+  },
+  layerslabel: {
+    id: 'sidebar.layerslabel',
+    description: 'Map layers, label in sidebar menu',
+    defaultMessage: 'Layers'
   }
 })
 
@@ -66,12 +96,18 @@ export class Sidebar extends React.Component {
       <Drawer {...this.props} >
         <MenuItem
           style={styles.list}
-          primaryText='Sites'
-          onTouchTap={this.goSites} />
+          primaryText={formatMessage(messages.siteslabel)}
+          rightIcon={<ArrowDropRight />}
+          menuItems={[
+            <MenuItem style={styles.list} primaryText='Site 1' />,
+            <MenuItem style={styles.list} primaryText='Site 2' />,
+            <MenuItem style={styles.list} primaryText='Site 3' />
+          ]}
+          />
         <Divider />
         <MenuItem
           style={styles.list}
-          primaryText='Views'
+          primaryText={formatMessage(messages.viewslabel)}
           rightIcon={<ArrowDropRight />}
           menuItems={[
             <MenuItem style={styles.list} primaryText='View 1' />,
@@ -82,7 +118,7 @@ export class Sidebar extends React.Component {
         <Divider />
         <MenuItem
           style={styles.list}
-          primaryText='Layers'
+          primaryText={formatMessage(messages.layerslabel)}
           rightIcon={<ArrowDropRight />}
           menuItems={[
             <MenuItem style={styles.list} primaryText='Satellite' insetChildren />
@@ -91,7 +127,7 @@ export class Sidebar extends React.Component {
         <Divider />
         <MenuItem
           style={styles.list}
-          primaryText='Language'
+          primaryText={formatMessage(messages.languagelabel)}
           rightIcon={<ArrowDropRight />}
           menuItems={[
             <MenuItem
@@ -120,12 +156,12 @@ export class Sidebar extends React.Component {
         <Divider />
         <MenuItem
           style={styles.list}
-          primaryText='Settings'
+          primaryText={formatMessage(messages.settingslabel)}
           onTouchTap={this.goSettings} />
         <Divider />
         <MenuItem
           style={styles.list}
-          primaryText='Sign Out'
+          primaryText={formatMessage(messages.signoutlabel)}
           onTouchTap={this.signOut}
         />
       </Drawer>

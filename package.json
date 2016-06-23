@@ -21,8 +21,8 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "build:i18n": "rm -rf _translations && BABEL_ENV=i18n babel --quiet src > /dev/null",
-    "build:i18n:translations": "npm run build:i18n && babel-node ./bin/manage-translations.js",
+    "i18n:extract": "rm -rf _translations && BABEL_ENV=i18n babel --quiet src > /dev/null",
+    "i18n:update": "npm run i18n:extract && babel-node ./bin/manage-translations.js",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {

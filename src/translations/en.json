@@ -1,13 +1,16 @@
 {
-  "counter.counterlabel": "Counter",
-  "counter.doubleButton": "Double",
-  "counter.incrementButton": "Increment",
-  "header.apptitle": "Demo App",
-  "header.countertitle": "Counter",
-  "header.headerlogin": "Login",
-  "header.hometitle": "Home",
-  "home.welcome": "Welcome!",
+  "auth.autherror": "Sign in failed",
+  "auth.loggedout": "You have been signed out",
   "languageSelector.chinese": "Chinese",
   "languageSelector.english": "English",
-  "languageSelector.spanish": "Spanish"
+  "languageSelector.spanish": "Spanish",
+  "login.password": "Password",
+  "login.signin": "Sign In",
+  "login.username": "Username",
+  "sidebar.language": "Language",
+  "sidebar.layerslabel": "Layers",
+  "sidebar.settings": "Settings",
+  "sidebar.signout": "Sign Out",
+  "sidebar.siteslabel": "Sites",
+  "sidebar.viewslabel": "Views"
 }

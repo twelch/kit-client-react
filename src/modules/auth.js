@@ -31,7 +31,7 @@ export function loginUserFailure (error) {
     type: LOGIN_USER_FAILURE,
     payload: {
       status: error.response.status,
-      statusText: error.response.statusText
+      errorText: true
     }
   }
 }
@@ -79,7 +79,7 @@ export function loginUser (username, password, redirect = '/sites') {
         dispatch(loginUserFailure({
           response: {
             status: 403,
-            statusText: 'Invalid token'
+            errorText: true
           }
         }))
       }
@@ -91,7 +91,7 @@ export function loginUser (username, password, redirect = '/sites') {
       dispatch(loginUserFailure({
         response: {
           status: 403,
-          statusText: 'Login failed'
+          errorText: true
         }
       }))
     })
@@ -115,14 +115,16 @@ const initialState = {
   user: null,
   isAuthenticated: false,
   isAuthenticating: false,
-  statusText: null
+  loggedOutText: false,
+  errorText: false
 }
 
 const authReducer = createReducer(initialState, {
   [LOGIN_USER_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       'isAuthenticating': true,
-      'statusText': null
+      'loggedOutText': false,
+      'errorText': false
     })
   },
   [LOGIN_USER_SUCCESS]: (state, payload) => {
@@ -131,7 +133,8 @@ const authReducer = createReducer(initialState, {
       'isAuthenticated': true,
       'token': payload.token,
       'user': payload.user,
-      'statusText': 'You have been successfully logged in.'
+      'loggedOutText': false,
+      'errorText': false
     })
   },
   [LOGIN_USER_FAILURE]: (state, payload) => {
@@ -140,7 +143,8 @@ const authReducer = createReducer(initialState, {
       'isAuthenticated': false,
       'token': null,
       'user': null,
-      'statusText': `${payload.statusText}`
+      'loggedOutText': false,
+      'errorText': true
     })
   },
   [LOGOUT_USER]: (state, payload) => {
@@ -148,7 +152,8 @@ const authReducer = createReducer(initialState, {
       'isAuthenticated': false,
       'token': null,
       'user': null,
-      'statusText': 'You have been successfully logged out.'
+      'loggedOutText': true,
+      'errorText': false
     })
   }
 })

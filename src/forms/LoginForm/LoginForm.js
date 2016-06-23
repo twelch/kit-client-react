@@ -3,13 +3,51 @@ import { reduxForm } from 'redux-form'
 import { TextField, RaisedButton } from 'material-ui'
 import Paper from 'material-ui/Paper'
 import validate from './validate'
+import {defineMessages, intlShape} from 'react-intl'
 
 export const fields = [ 'username', 'password' ]
 
+const messages = defineMessages({
+  username: {
+    id: 'login.username',
+    description: 'username lanel on login form',
+    defaultMessage: 'Username'
+  },
+  password: {
+    id: 'login.password',
+    description: 'password label on login form',
+    defaultMessage: 'Password'
+  },
+  signin: {
+    id: 'login.signin',
+    description: 'button to submit login form and sign into account',
+    defaultMessage: 'Sign In'
+  },
+  autherror: {
+    id: 'auth.autherror',
+    description: 'sign in error messages',
+    defaultMessage: 'Sign In failed'
+  },
+  loggedout: {
+    id: 'auth.loggedout',
+    description: 'successful sign out message',
+    defaultMessage: 'You have been signed out'
+  }
+})
+
 class Login extends React.Component {
 
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    errorText: PropTypes.string,
+    loggedOutText: PropTypes.string,
+    isAuthenticating: PropTypes.bool.isRequired,
+    intl: intlShape.isRequired
+  }
+
   render () {
-    const { fields: { username, password }, statusText, handleSubmit, isAuthenticating } = this.props
+    const { intl: {formatMessage, locale}, fields: { username, password }, errorText, loggedOutText, handleSubmit, isAuthenticating } = this.props
     const style = {
       bigError: {
         fontSize: '14px',
@@ -23,13 +61,20 @@ class Login extends React.Component {
 
     return (
       <Paper style={style.container} zDepth={1} rounded={false} >
-        <form onSubmit={handleSubmit}>
-          <div style={style.bigError}>{statusText}</div>
+        <form onSubmit={handleSubmit}>          
+          {loggedOutText 
+            ? <div style={style.bigError}>{formatMessage(messages.loggedout)}</div>
+            : null
+          }
+          {errorText
+            ? <div style={style.bigError}>{formatMessage(messages.autherror)}</div>
+            : null
+          }          
           <div>
             <div>
               <TextField
                 {...username}
-                hintText='Username'
+                hintText={formatMessage(messages.username)}
                 errorText={username.touched && username.error && <div>{username.error}</div>} />
             </div>
           </div>
@@ -37,7 +82,7 @@ class Login extends React.Component {
             <TextField
               {...password}
               type='password'
-              hintText='Password'
+              hintText={formatMessage(messages.password)}
               errorText={password.touched && password.error && <div>{password.error}</div>} />
           </div>
           <div>
@@ -46,7 +91,7 @@ class Login extends React.Component {
               type='submit'
               disabled={isAuthenticating}
               onTouchTap={this.handleTouchTap}
-              label='Sign In'
+              label={formatMessage(messages.signin)}
               style={{marginTop: 20, width: '100%'}}
             />
           </div>
@@ -54,13 +99,6 @@ class Login extends React.Component {
       </Paper>
     )
   }
-}
-
-Login.propTypes = {
-  fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  statusText: PropTypes.string,
-  isAuthenticating: PropTypes.bool.isRequired
 }
 
 export default reduxForm({

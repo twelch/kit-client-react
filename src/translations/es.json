@@ -1,13 +1,16 @@
 {
-  "counter.counterlabel": "Contador",
-  "counter.doubleButton": "Duplica",
-  "counter.incrementButton": "Incrementas",
-  "header.apptitle": "Aplicación de Demostración",
-  "header.countertitle": "Contador",
-  "header.headerlogin": "Login",
-  "header.hometitle": "Inicio",
-  "home.welcome": "Bienvenido!",
+  "auth.autherror": "Error de inicio de sesion",
+  "auth.loggedout": "You have been signed out",
   "languageSelector.chinese": "Chino",
   "languageSelector.english": "Inglés",
-  "languageSelector.spanish": "Español"
+  "languageSelector.spanish": "Español",
+  "login.password": "Clave",
+  "login.signin": "Ingresar",
+  "login.username": "Seudónimo",
+  "sidebar.language": "Idioma (Language)",
+  "sidebar.layerslabel": "Estratos",
+  "sidebar.settings": "Configuración",
+  "sidebar.signout": "Salida",
+  "sidebar.siteslabel": "Sitios",
+  "sidebar.viewslabel": "Vistas"
 }

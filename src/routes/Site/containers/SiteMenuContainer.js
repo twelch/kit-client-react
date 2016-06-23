@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import SiteMenu from '../components/SiteMenu'
 import { getCurSite, selectView } from 'modules/sites'
+import {injectIntl} from 'react-intl'
 
 const mapActionCreators = {
   selectView
@@ -12,4 +13,4 @@ const mapStateToProps = (state, props) => ({
   site: getCurSite(state, props) // Selector
 })
 
-export default connect(mapStateToProps, mapActionCreators)(SiteMenu)
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(SiteMenu))
