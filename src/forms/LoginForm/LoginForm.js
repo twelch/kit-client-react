@@ -40,8 +40,8 @@ class Login extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    errorText: PropTypes.string,
-    loggedOutText: PropTypes.string,
+    errorText: PropTypes.bool.isRequired,
+    loggedOutText: PropTypes.bool.isRequired,
     isAuthenticating: PropTypes.bool.isRequired,
     intl: intlShape.isRequired
   }

@@ -6,7 +6,6 @@ export const LOCALE_CHANGE = 'LOCALE_CHANGE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-// export const localeChange = createAction(LOCALE_CHANGE, (value) => value)
 export function localeChange (value = 'en') {
   return {
     type: LOCALE_CHANGE,
@@ -28,7 +27,16 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = navigator.language || navigator.browserLanguage
+
+// Get browser language
+let language = null
+if (navigator.languages && navigator.language.length > 0) {
+  language = navigator.languages[0]
+} else {
+  language = navigator.language || navigator.browserLanguage
+}
+
+const initialState = language
 export default function localeReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

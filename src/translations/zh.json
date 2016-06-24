@@ -5,6 +5,7 @@
   "languageSelector.english": "英语 (english)",
   "languageSelector.spanish": "西班牙语 (spanish)",
   "login.password": "密码",
+  "login.required": "需要",
   "login.signin": "登录",
   "login.username": "用户名",
   "sidebar.language": "语 (Language)",
@@ -12,5 +13,6 @@
   "sidebar.settings": "设置",
   "sidebar.signout": "注销",
   "sidebar.siteslabel": "网站",
-  "sidebar.viewslabel": "风光"
+  "sidebar.viewslabel": "风光",
+  "sitemenu.siteslabel": "网站"
 }

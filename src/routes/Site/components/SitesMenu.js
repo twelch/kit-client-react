@@ -4,6 +4,16 @@ import {List, ListItem, MakeSelectable} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
 import { makeSiteComponent } from 'routes/Site/components/SiteComponent'
+import {defineMessages, intlShape} from 'react-intl'
+
+const messages = defineMessages({
+  siteslabel: {
+    id: 'sitemenu.siteslabel',
+    description: 'Heading label for sites menu',
+    defaultMessage: 'Sites',
+    intl: intlShape.isRequired
+  }
+})
 
 const SelectableList = MakeSelectable(List)
 
@@ -28,7 +38,7 @@ export class SitesMenu extends React.Component {
   }
 
   render () {
-    const { isFetching, sites } = this.props
+    const { isFetching, sites, intl: {formatMessage} } = this.props
 
     const styles = {
       sites: {
@@ -73,7 +83,7 @@ export class SitesMenu extends React.Component {
       <div style={styles.root}>
         <div style={styles.sites}>
           <Toolbar>
-            <ToolbarTitle text='Sites' />
+            <ToolbarTitle text={formatMessage(messages.siteslabel)} />
           </Toolbar>
           {CurList}
         </div>

@@ -3,8 +3,13 @@ import es from './es.json'
 import zh from './zh.json'
 
 export const translations = {
-  en,
-  'en-US': en, // Reuse en translations for multiple locales
-  es,
-  zh
+  'en': en,
+  'en-US': en,
+  'es': es,
+  'zh': zh,
+  'zh-CN': zh,
+  'zh-cn': zh,
+  'zh-hk': zh,
+  'zh-Hans': zh,
+  'zh-Hant': zh
 }

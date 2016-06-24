@@ -5,6 +5,7 @@
   "languageSelector.english": "English",
   "languageSelector.spanish": "Spanish",
   "login.password": "Password",
+  "login.required": "Required",
   "login.signin": "Sign In",
   "login.username": "Username",
   "sidebar.language": "Language",
@@ -12,5 +13,6 @@
   "sidebar.settings": "Settings",
   "sidebar.signout": "Sign Out",
   "sidebar.siteslabel": "Sites",
-  "sidebar.viewslabel": "Views"
+  "sidebar.viewslabel": "Views",
+  "sitemenu.siteslabel": "Sites"
 }

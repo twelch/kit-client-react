@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import SitesMenu from '../components/SitesMenu'
 import { fetchSites, selectSite } from 'modules/sites'
+import {injectIntl} from 'react-intl'
 
 const mapActionCreators = {
   fetchSites,
@@ -13,4 +14,4 @@ const mapStateToProps = (state) => ({
   sites: state.sites.configs
 })
 
-export default connect(mapStateToProps, mapActionCreators)(SitesMenu)
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(SitesMenu))

@@ -1,10 +1,11 @@
 {
   "auth.autherror": "Error de inicio de sesion",
-  "auth.loggedout": "You have been signed out",
+  "auth.loggedout": "Que ha cerrado la sesión",
   "languageSelector.chinese": "Chino",
   "languageSelector.english": "Inglés",
   "languageSelector.spanish": "Español",
   "login.password": "Clave",
+  "login.required": "Necesario",
   "login.signin": "Ingresar",
   "login.username": "Seudónimo",
   "sidebar.language": "Idioma (Language)",
@@ -12,5 +13,6 @@
   "sidebar.settings": "Configuración",
   "sidebar.signout": "Salida",
   "sidebar.siteslabel": "Sitios",
-  "sidebar.viewslabel": "Vistas"
+  "sidebar.viewslabel": "Vistas",
+  "sitemenu.siteslabel": "Sitios"
 }
