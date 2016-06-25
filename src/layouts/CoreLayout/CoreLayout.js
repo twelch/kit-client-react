@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import Sidebar from 'containers/Sidebar'
-import classes from './CoreLayout.scss'
 import '../../styles/core.scss'
 import { toggleSidebar, setSidebar } from 'modules/sidebar'
 
@@ -16,16 +15,26 @@ class CoreLayout extends React.Component {
   }
 
   render () {
+    const barStyle = {
+      top: 0,
+      left: 0,
+      position: 'absolute',
+      background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%)',
+      backgroundColor: 'transparent',
+      boxShadow: 'none'
+    }
+
     return (
-      <div className='container'>
+      <div>
         <AppBar
+          style={barStyle}
           onLeftIconButtonTouchTap={this.props.toggleSidebar} />
-        <Sidebar
-          docked={false}
-          width={200}
-          open={this.props.sidebar}
-          onRequestChange={this.props.setSidebar} />
-        <div className={classes.mainContainer}>
+        <div>
+          <Sidebar
+            docked={false}
+            width={200}
+            open={this.props.sidebar}
+            onRequestChange={this.props.setSidebar} />
           {this.props.children}
         </div>
       </div>

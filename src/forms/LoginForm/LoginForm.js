@@ -47,7 +47,15 @@ class Login extends React.Component {
   }
 
   render () {
-    const { intl: {formatMessage, locale}, fields: { username, password }, errorText, loggedOutText, handleSubmit, isAuthenticating } = this.props
+    const {
+      intl: {formatMessage},
+      fields: { username, password },
+      errorText,
+      loggedOutText,
+      handleSubmit,
+      isAuthenticating
+    } = this.props
+
     const style = {
       bigError: {
         fontSize: '14px',
@@ -61,15 +69,15 @@ class Login extends React.Component {
 
     return (
       <Paper style={style.container} zDepth={1} rounded={false} >
-        <form onSubmit={handleSubmit}>          
-          {loggedOutText 
+        <form onSubmit={handleSubmit}>
+          {loggedOutText
             ? <div style={style.bigError}>{formatMessage(messages.loggedout)}</div>
             : null
           }
           {errorText
             ? <div style={style.bigError}>{formatMessage(messages.autherror)}</div>
             : null
-          }          
+          }
           <div>
             <div>
               <TextField

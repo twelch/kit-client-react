@@ -10,8 +10,7 @@ const messages = defineMessages({
   siteslabel: {
     id: 'sitemenu.siteslabel',
     description: 'Heading label for sites menu',
-    defaultMessage: 'Sites',
-    intl: intlShape.isRequired
+    defaultMessage: 'Sites'
   }
 })
 
@@ -24,7 +23,8 @@ export class SitesMenu extends React.Component {
     fetchSites: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     sites: PropTypes.object,
-    selectSite: PropTypes.func.isRequired
+    selectSite: PropTypes.func.isRequired,
+    intl: intlShape.isRequired
   }
 
   constructor () {

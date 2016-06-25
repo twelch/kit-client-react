@@ -1,14 +1,7 @@
 import React, { PropTypes } from 'react'
+import PageLayout from 'layouts/PageLayout'
 import LoginForm from 'forms/LoginForm/LoginContainer'
 import { push } from 'react-router-redux'
-
-const styles = {
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
-  }
-}
 
 class HomeView extends React.Component {
 
@@ -30,12 +23,12 @@ class HomeView extends React.Component {
   render () {
     const { isAuthenticated } = this.props
     return (
-      <div style={styles.root} >
+      <PageLayout>
         {!isAuthenticated
           ? <LoginForm />
           : null
         }
-      </div>
+      </PageLayout>
     )
   }
 }

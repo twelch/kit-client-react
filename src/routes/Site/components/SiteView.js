@@ -1,19 +1,7 @@
 import React, { PropTypes } from 'react'
+import PageLayout from 'layouts/PageLayout'
 import SiteMenu from '../containers/SiteMenuContainer'
-import NotFound from 'components/NotFound'
-
-const styles = {
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
-  },
-  header: {
-    fontSize: '1.75rem',
-    fontFamily: 'Roboto, sans-serif',
-    margin: '1rem 0 2rem 0'
-  }
-}
+import NotFound from 'containers/NotFound'
 
 const SiteView = (props, context) => {
   const {sites, params} = props
@@ -27,9 +15,9 @@ const SiteView = (props, context) => {
   }
 
   return (
-    <div style={styles.root} >
+    <PageLayout>
       {Component}
-    </div>
+    </PageLayout>
   )
 }
 

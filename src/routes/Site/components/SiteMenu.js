@@ -23,7 +23,7 @@ export class SiteMenu extends React.Component {
   }
 
   viewSelected (event, viewid) {
-    this.props.selectView(this.props.params.siteid, viewid)
+    this.props.selectView(this.props.params.siteid, this.props.site.views[viewid].id)
   }
 
   render () {
@@ -42,6 +42,9 @@ export class SiteMenu extends React.Component {
       },
       list: {
         WebkitAppearance: 'none'
+      },
+      header: {
+        fontFamily: 'Roboto'
       }
     }
 
@@ -67,7 +70,7 @@ export class SiteMenu extends React.Component {
       <div style={styles.root}>
         <div style={styles.sites}>
           <Toolbar>
-            <ToolbarTitle text={site.name} />
+            <ToolbarTitle text={site.name} style={styles.header} />
           </Toolbar>
           {CurList}
         </div>

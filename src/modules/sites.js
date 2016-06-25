@@ -64,7 +64,7 @@ export function selectSite (siteid) {
 
 export function selectView (siteid, viewid) {
   return (dispatch, state) => {
-    dispatch(push('/sites/' + siteid + '/views/' + viewid))
+    dispatch(push('/sites/' + siteid + '/' + viewid))
   }
 }
 
