@@ -84,6 +84,7 @@ export const actions = {
 export const getCurSite = (state, props) => {
   if (!state.sites ||
       !state.sites.configs ||
+      !props.params ||
       !props.params.siteid) {
     return null
   }
@@ -94,6 +95,13 @@ export const getCurSite = (state, props) => {
     return null
   }
   return site
+}
+
+export const numSites = (state) => {
+  if (!state.sites || !state.sites.configs) {
+    return null
+  }
+  return Object.keys(state.sites.configs).length
 }
 
 // ------------------------------------

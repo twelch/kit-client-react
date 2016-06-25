@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { makeSiteComponent } from 'routes/Site/components/SiteComponent'
 import MapLayout from 'layouts/MapLayout'
 
-export class MapView extends React.Component {
+class MapView extends React.Component {
 
   static propTypes = {
     site: PropTypes.object,

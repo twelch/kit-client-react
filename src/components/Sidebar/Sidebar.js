@@ -59,7 +59,11 @@ export class Sidebar extends React.Component {
     logout: React.PropTypes.func.isRequired,
     localeChange: React.PropTypes.func.isRequired,
     intl: intlShape.isRequired,
-    closeSidebar: React.PropTypes.func.isRequired
+    closeSidebar: React.PropTypes.func.isRequired,
+    isAuthenticated: React.PropTypes.bool.isRequired,
+    numSites: React.PropTypes.number,
+    sites: React.PropTypes.object,
+    site: React.PropTypes.object
   }
 
   constructor () {
@@ -86,45 +90,68 @@ export class Sidebar extends React.Component {
   }
 
   render () {
-    let {formatMessage, locale} = this.props.intl
+    let { intl: {formatMessage, locale}, isAuthenticated, numSites, sites, site } = this.props
     locale = locale.split('-')[0]
+
     const styles = {
       list: { WebkitAppearance: 'none' }
     }
 
     return (
       <Drawer {...this.props} >
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.siteslabel)}
-          rightIcon={<ArrowDropRight />}
-          menuItems={[
-            <MenuItem style={styles.list} primaryText='Site 1' />,
-            <MenuItem style={styles.list} primaryText='Site 2' />,
-            <MenuItem style={styles.list} primaryText='Site 3' />
-          ]}
+       
+        {isAuthenticated && numSites > 1
+          ? <MenuItem
+              style={styles.list}
+              primaryText={formatMessage(messages.siteslabel)}
+              rightIcon={<ArrowDropRight />}
+              menuItems={[
+                <MenuItem style={styles.list} primaryText='Site 1' />,
+                <MenuItem style={styles.list} primaryText='Site 2' />,
+                <MenuItem style={styles.list} primaryText='Site 3' />
+              ]}
+              />
+          : null
+        }
+        {isAuthenticated && numSites > 1
+          ? <Divider />
+          : null
+        }        
+
+        {isAuthenticated
+          ? <MenuItem
+              style={styles.list}
+              primaryText={formatMessage(messages.viewslabel)}
+              rightIcon={<ArrowDropRight />}
+              menuItems={[
+                <MenuItem style={styles.list} primaryText='View 1' />,
+                <MenuItem style={styles.list} primaryText='View 2' />,
+                <MenuItem style={styles.list} primaryText='View 3' />
+              ]}
+            />
+          : null
+        }
+        {isAuthenticated
+          ? <Divider />
+          : null
+        }
+        
+        {isAuthenticated
+          ? <MenuItem
+            style={styles.list}
+            primaryText={formatMessage(messages.layerslabel)}
+            rightIcon={<ArrowDropRight />}
+            menuItems={[
+              <MenuItem style={styles.list} primaryText='Satellite' insetChildren />
+            ]}
           />
-        <Divider />
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.viewslabel)}
-          rightIcon={<ArrowDropRight />}
-          menuItems={[
-            <MenuItem style={styles.list} primaryText='View 1' />,
-            <MenuItem style={styles.list} primaryText='View 2' />,
-            <MenuItem style={styles.list} primaryText='View 3' />
-          ]}
-        />
-        <Divider />
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.layerslabel)}
-          rightIcon={<ArrowDropRight />}
-          menuItems={[
-            <MenuItem style={styles.list} primaryText='Satellite' insetChildren />
-          ]}
-        />
-        <Divider />
+          : null
+        }        
+        {isAuthenticated
+          ? <Divider />
+          : null
+        }
+
         <MenuItem
           style={styles.list}
           primaryText={formatMessage(messages.languagelabel)}
@@ -153,17 +180,33 @@ export class Sidebar extends React.Component {
               checked={locale === 'es'} />
           ]}
         />
-        <Divider />
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.settingslabel)}
-          onTouchTap={this.goSettings} />
-        <Divider />
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.signoutlabel)}
-          onTouchTap={this.signOut}
-        />
+        <Divider />        
+
+        {isAuthenticated
+          ? <MenuItem
+              style={styles.list}
+              primaryText={formatMessage(messages.settingslabel)}
+              onTouchTap={this.goSettings} />
+          : null
+        }
+        {isAuthenticated
+          ? <Divider />
+          : null
+        }
+
+        {isAuthenticated 
+          ? <MenuItem
+              style={styles.list}
+              primaryText={formatMessage(messages.signoutlabel)}
+              onTouchTap={this.signOut}
+            />
+          : null
+        }
+        {isAuthenticated
+          ? <Divider />
+          : null
+        } 
+        
       </Drawer>
     )
   }
