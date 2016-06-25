@@ -1,0 +1,112 @@
+[
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Not Found",
+        "description": "Error message displayed when resource was not found",
+        "id": "notfound.notfound"
+      }
+    ],
+    "path": "src/components/NotFound/NotFound.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Spanish",
+        "description": "Select language",
+        "id": "languageSelector.spanish"
+      },
+      {
+        "defaultMessage": "English",
+        "description": "Select language",
+        "id": "languageSelector.english"
+      },
+      {
+        "defaultMessage": "Chinese",
+        "description": "Select language",
+        "id": "languageSelector.chinese"
+      },
+      {
+        "defaultMessage": "Sites",
+        "description": "Button label to switch Sites.  Sites are private areas for each client/partner to access their views.",
+        "id": "sidebar.siteslabel"
+      },
+      {
+        "defaultMessage": "Views",
+        "description": "Button label to switch Views.  Views include traffic views, parking views, etc.",
+        "id": "sidebar.viewslabel"
+      },
+      {
+        "defaultMessage": "Language",
+        "description": "Button label to access language menu",
+        "id": "sidebar.language"
+      },
+      {
+        "defaultMessage": "Settings",
+        "description": "Button label to access settings menu",
+        "id": "sidebar.settings"
+      },
+      {
+        "defaultMessage": "Sign Out",
+        "description": "Button label to sign out of user account",
+        "id": "sidebar.signout"
+      },
+      {
+        "defaultMessage": "Layers",
+        "description": "Button label to access map layers",
+        "id": "sidebar.layerslabel"
+      }
+    ],
+    "path": "src/components/Sidebar/Sidebar.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Username",
+        "description": "username lanel on login form",
+        "id": "login.username"
+      },
+      {
+        "defaultMessage": "Password",
+        "description": "password label on login form",
+        "id": "login.password"
+      },
+      {
+        "defaultMessage": "Sign In",
+        "description": "button to submit login form and sign into account",
+        "id": "login.signin"
+      },
+      {
+        "defaultMessage": "Sign In failed",
+        "description": "sign in error messages",
+        "id": "auth.autherror"
+      },
+      {
+        "defaultMessage": "You have been signed out",
+        "description": "successful sign out message",
+        "id": "auth.loggedout"
+      }
+    ],
+    "path": "src/forms/LoginForm/LoginForm.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Required",
+        "description": "Error shown when required form field is not provided",
+        "id": "login.required"
+      }
+    ],
+    "path": "src/forms/LoginForm/validate.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Sites",
+        "description": "Heading label for sites menu",
+        "id": "sitemenu.siteslabel"
+      }
+    ],
+    "path": "src/routes/Site/components/SitesMenu.json"
+  }
+]

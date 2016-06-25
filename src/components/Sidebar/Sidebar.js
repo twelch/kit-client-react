@@ -23,32 +23,32 @@ const messages = defineMessages({
   },
   siteslabel: {
     id: 'sidebar.siteslabel',
-    description: 'Sites label in sidebar menu',
+    description: 'Button label to switch Sites, which are private areas for client/partner to access views.',
     defaultMessage: 'Sites'
-  },  
+  },
   viewslabel: {
     id: 'sidebar.viewslabel',
-    description: 'Views label in sidebar menu',
+    description: 'Button label to switch Views.  Views include traffic views, parking views, etc.',
     defaultMessage: 'Views'
   },
   languagelabel: {
     id: 'sidebar.language',
-    description: 'Language label in sidebar menu',
+    description: 'Button label to access language menu',
     defaultMessage: 'Language'
   },
   settingslabel: {
     id: 'sidebar.settings',
-    description: 'Settings label in sidebar menu',
+    description: 'Button label to access settings menu',
     defaultMessage: 'Settings'
   },
   signoutlabel: {
     id: 'sidebar.signout',
-    description: 'Sign Out label in sidebar menu',
+    description: 'Button label to sign out of user account',
     defaultMessage: 'Sign Out'
   },
   layerslabel: {
     id: 'sidebar.layerslabel',
-    description: 'Map layers, label in sidebar menu',
+    description: 'Button label to access map layers',
     defaultMessage: 'Layers'
   }
 })
