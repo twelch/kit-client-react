@@ -11,7 +11,8 @@ class CoreLayout extends React.Component {
     children: React.PropTypes.element.isRequired,
     toggleSidebar: React.PropTypes.func.isRequired,
     sidebar: React.PropTypes.bool.isRequired,
-    setSidebar: React.PropTypes.func.isRequired
+    setSidebar: React.PropTypes.func.isRequired,
+    params: React.PropTypes.object.isRequired
   }
 
   render () {
@@ -31,8 +32,9 @@ class CoreLayout extends React.Component {
           onLeftIconButtonTouchTap={this.props.toggleSidebar} />
         <div>
           <Sidebar
+            params={this.props.params}
             docked={false}
-            width={200}
+            width={250}
             open={this.props.sidebar}
             onRequestChange={this.props.setSidebar} />
           {this.props.children}

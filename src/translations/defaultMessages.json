@@ -28,7 +28,7 @@
       },
       {
         "defaultMessage": "Sites",
-        "description": "Button label to switch Sites.  Sites are private areas for each client/partner to access their views.",
+        "description": "Button label to switch Sites, which are private areas for client/partner to access views.",
         "id": "sidebar.siteslabel"
       },
       {
@@ -55,6 +55,11 @@
         "defaultMessage": "Layers",
         "description": "Button label to access map layers",
         "id": "sidebar.layerslabel"
+      },
+      {
+        "defaultMessage": "Satellite",
+        "description": "Satellite map layer",
+        "id": "sidebar.satlayer"
       }
     ],
     "path": "src/components/Sidebar/Sidebar.json"

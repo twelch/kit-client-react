@@ -1,9 +1,17 @@
 import React from 'react'
 import Drawer from 'material-ui/Drawer'
-import Divider from 'material-ui/Divider'
-import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right'
-import MenuItem from 'material-ui/MenuItem'
+import {List, ListItem, MakeSelectable} from 'material-ui/List'
+import {Divider, Toggle} from 'material-ui'
+import Done from 'material-ui/svg-icons/action/done'
+import Pages from 'material-ui/svg-icons/social/pages'
+import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
+import Layers from 'material-ui/svg-icons/maps/layers'
+import Language from 'material-ui/svg-icons/action/language'
+import Settings from 'material-ui/svg-icons/action/settings'
+import Input from 'material-ui/svg-icons/action/input'
 import {defineMessages, intlShape} from 'react-intl'
+
+const SelectableList = MakeSelectable(List)
 
 const messages = defineMessages({
   spanish: {
@@ -50,12 +58,18 @@ const messages = defineMessages({
     id: 'sidebar.layerslabel',
     description: 'Button label to access map layers',
     defaultMessage: 'Layers'
+  },
+  satlayer: {
+    id: 'sidebar.satlayer',
+    description: 'Satellite map layer',
+    defaultMessage: 'Satellite'
   }
 })
 
 export class Sidebar extends React.Component {
   static propTypes = {
-    showSites: React.PropTypes.func.isRequired,
+    selectSite: React.PropTypes.func.isRequired,
+    selectView: React.PropTypes.func.isRequired,
     logout: React.PropTypes.func.isRequired,
     localeChange: React.PropTypes.func.isRequired,
     intl: intlShape.isRequired,
@@ -63,20 +77,17 @@ export class Sidebar extends React.Component {
     isAuthenticated: React.PropTypes.bool.isRequired,
     numSites: React.PropTypes.number,
     sites: React.PropTypes.object,
-    site: React.PropTypes.object
+    site: React.PropTypes.object,
+    params: React.PropTypes.object.isRequired
   }
 
   constructor () {
     super()
     // Set handler scope as es6 doesn't do this for us
-    this.goSites = this.goSites.bind(this)
     this.signOut = this.signOut.bind(this)
     this.changeLanguage = this.changeLanguage.bind(this)
-  }
-
-  goSites () {
-    this.props.showSites()
-    this.props.closeSidebar()
+    this.changeSite = this.changeSite.bind(this)
+    this.changeView = this.changeView.bind(this)
   }
 
   signOut () {
@@ -84,109 +95,161 @@ export class Sidebar extends React.Component {
     this.props.closeSidebar()
   }
 
-  changeLanguage (locale) {
+  changeLanguage (event, locale) {
     this.props.localeChange(locale)
-    this.props.closeSidebar()
+  }
+
+  changeSite (event, siteid) {
+    this.props.selectSite(siteid)
+  }
+
+  changeView (event, viewid) {
+    if (!this.props.params.siteid) {
+      throw new Error()
+    }
+    this.props.selectView(this.props.params.siteid, viewid)
   }
 
   render () {
     let { intl: {formatMessage, locale}, isAuthenticated, numSites, sites, site } = this.props
+    const curSiteID = this.props.params.siteid
+    const curViewID = this.props.params.viewid
     locale = locale.split('-')[0]
 
+    const languages = [
+      {locale: 'en', name: formatMessage(messages.english)},
+      {locale: 'es', name: formatMessage(messages.spanish)},
+      {locale: 'zh', name: formatMessage(messages.chinese)}
+    ]
+
     const styles = {
-      list: { WebkitAppearance: 'none' }
+      list: {
+        WebkitAppearance: 'none'
+      },
+      listChild: {
+        WebkitAppearance: 'none',
+        marginLeft: 20
+      }
     }
 
     return (
       <Drawer {...this.props} >
-       
+
         {isAuthenticated && numSites > 1
-          ? <MenuItem
-              style={styles.list}
+          ? <SelectableList
+            value=''
+            onChange={this.changeSite} >
+            <ListItem
+              leftIcon={<Pages />}
               primaryText={formatMessage(messages.siteslabel)}
-              rightIcon={<ArrowDropRight />}
-              menuItems={[
-                <MenuItem style={styles.list} primaryText='Site 1' />,
-                <MenuItem style={styles.list} primaryText='Site 2' />,
-                <MenuItem style={styles.list} primaryText='Site 3' />
-              ]}
-              />
+              primaryTogglesNestedList
+              style={styles.list}
+              nestedItems={Object.keys(sites).map((siteid) => {
+                return (
+                  <ListItem
+                    value={siteid}
+                    primaryText={sites[siteid].name}
+                    style={styles.list}
+                    insetChildren={curSiteID !== siteid}
+                    leftIcon={curSiteID === siteid ? <Done /> : null} />
+                )
+              })}
+            />
+          </SelectableList>
           : null
         }
         {isAuthenticated && numSites > 1
           ? <Divider />
           : null
-        }        
+        }
 
-        {isAuthenticated
-          ? <MenuItem
-              style={styles.list}
+        {isAuthenticated && site && site.views
+          ? <SelectableList
+            value=''
+            onChange={this.changeView} >
+            <ListItem
+              leftIcon={<PinDrop />}
               primaryText={formatMessage(messages.viewslabel)}
-              rightIcon={<ArrowDropRight />}
-              menuItems={[
-                <MenuItem style={styles.list} primaryText='View 1' />,
-                <MenuItem style={styles.list} primaryText='View 2' />,
-                <MenuItem style={styles.list} primaryText='View 3' />
+              primaryTogglesNestedList
+              style={styles.list}
+              nestedItems={site.views.map((view, index) => {
+                return (
+                  <ListItem
+                    value={view.id}
+                    primaryText={view.name}
+                    style={styles.list}
+                    insetChildren={curViewID !== view.id}
+                    leftIcon={curViewID === view.id ? <Done /> : null} />
+                )
+              })}
+            />
+          </SelectableList>
+          : null
+        }
+        {isAuthenticated
+          ? <Divider />
+          : null
+        }
+
+        {isAuthenticated && curViewID
+          ? <SelectableList
+            value=''
+            onChange={this.changeLanguage} >
+            <ListItem
+              primaryText={formatMessage(messages.layerslabel)}
+              leftIcon={<Layers />}
+              primaryTogglesNestedList
+              style={styles.list}
+              nestedItems={[
+                <ListItem
+                  rightToggle={<Toggle />}
+                  style={styles.list}
+                  innerDivStyle={styles.listChild}
+                  primaryText={formatMessage(messages.satlayer)}
+                  value='en' />
               ]}
             />
+          </SelectableList>
           : null
         }
         {isAuthenticated
           ? <Divider />
           : null
         }
-        
-        {isAuthenticated
-          ? <MenuItem
+
+        <SelectableList
+          value=''
+          onChange={this.changeLanguage} >
+          <ListItem
+            primaryText={formatMessage(messages.languagelabel)}
+            leftIcon={<Language />}
+            primaryTogglesNestedList
             style={styles.list}
-            primaryText={formatMessage(messages.layerslabel)}
-            rightIcon={<ArrowDropRight />}
-            menuItems={[
-              <MenuItem style={styles.list} primaryText='Satellite' insetChildren />
-            ]}
+            nestedItems={languages.map((lang) => {
+              return (
+                <ListItem
+                  value={lang.locale}
+                  primaryText={lang.name}
+                  style={styles.list}
+                  insetChildren={locale !== lang.locale}
+                  leftIcon={locale === lang.locale ? <Done /> : null} />
+              )
+            })}
           />
-          : null
-        }        
-        {isAuthenticated
-          ? <Divider />
-          : null
-        }
-
-        <MenuItem
-          style={styles.list}
-          primaryText={formatMessage(messages.languagelabel)}
-          rightIcon={<ArrowDropRight />}
-          menuItems={[
-            <MenuItem
-              id='en'
-              style={styles.list}
-              primaryText={formatMessage(messages.english)}
-              onTouchTap={() => this.changeLanguage('en')} // eslint-disable-line react/jsx-no-bind
-              insetChildren
-              checked={locale === 'en'} />,
-            <MenuItem
-              id='zh'
-              style={styles.list}
-              primaryText={formatMessage(messages.chinese)}
-              onTouchTap={() => this.changeLanguage('zh')} // eslint-disable-line react/jsx-no-bind
-              insetChildren
-              checked={locale === 'zh'} />,
-            <MenuItem
-              id='es'
-              style={styles.list}
-              primaryText={formatMessage(messages.spanish)}
-              onTouchTap={() => this.changeLanguage('es')} // eslint-disable-line react/jsx-no-bind
-              insetChildren
-              checked={locale === 'es'} />
-          ]}
-        />
-        <Divider />        
+        </SelectableList>
+        <Divider />
 
         {isAuthenticated
-          ? <MenuItem
-              style={styles.list}
+          ? <SelectableList
+            value=''
+            onChange={this.goSettings} >
+            <ListItem
               primaryText={formatMessage(messages.settingslabel)}
-              onTouchTap={this.goSettings} />
+              leftIcon={<Settings />}
+              primaryTogglesNestedList
+              style={styles.list}
+            />
+          </SelectableList>
           : null
         }
         {isAuthenticated
@@ -194,19 +257,22 @@ export class Sidebar extends React.Component {
           : null
         }
 
-        {isAuthenticated 
-          ? <MenuItem
-              style={styles.list}
+        {isAuthenticated
+          ? <List>
+            <ListItem
               primaryText={formatMessage(messages.signoutlabel)}
+              leftIcon={<Input />}
               onTouchTap={this.signOut}
+              style={styles.list}
             />
+          </List>
           : null
         }
         {isAuthenticated
           ? <Divider />
           : null
-        } 
-        
+        }
+
       </Drawer>
     )
   }

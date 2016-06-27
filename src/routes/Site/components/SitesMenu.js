@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar'
 import {List, ListItem, MakeSelectable} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-import PinDrop from 'material-ui/svg-icons/maps/pin-drop'
+import Pages from 'material-ui/svg-icons/social/pages'
 import { makeSiteComponent } from 'routes/Site/components/SiteComponent'
 import {defineMessages, intlShape} from 'react-intl'
 
@@ -64,7 +64,7 @@ export class SitesMenu extends React.Component {
         return (<ListItem
           key={index + 1}
           value={site.id}
-          leftAvatar={<Avatar icon={<PinDrop />} />}
+          leftAvatar={<Avatar icon={<Pages />} />}
           primaryText={site.name}
           secondaryText={site.description}
           style={styles.list}

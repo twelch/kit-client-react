@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import Sidebar from '../../components/Sidebar'
 import { openSidebar, closeSidebar, setSidebar, toggleSidebar } from 'modules/sidebar'
-import { showSites } from 'modules/sites'
 import { logout } from 'modules/auth'
 import { localeChange } from 'modules/locale'
 import { getCurSite, numSites, selectSite, selectView } from 'modules/sites'
@@ -19,7 +18,8 @@ const mapActionCreators = {
   closeSidebar,
   setSidebar,
   toggleSidebar,
-  showSites,
+  selectSite,
+  selectView,
   logout,
   localeChange
 }
