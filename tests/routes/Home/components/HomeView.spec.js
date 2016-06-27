@@ -1,24 +1,39 @@
 import React from 'react'
-import { HomeView } from 'routes/Home/components/HomeView'
-import { render } from 'enzyme'
+import TestUtils from 'react-addons-test-utils'
+import HomeView from 'routes/Home/components/HomeView'
+import { shallow } from 'enzyme'
+import LoginForm from 'forms/LoginForm/LoginContainer'
+
+function shallowRender (component) {
+  const renderer = TestUtils.createRenderer()
+
+  renderer.render(component)
+  return renderer.getRenderOutput()
+}
+
+function shallowRenderWithProps (props = {}) {
+  return shallowRender(<HomeView {...props} />)
+}
 
 describe('(View) Home', () => {
-  let _component
-
   beforeEach(() => {
-    _component = render(<HomeView />)
+    
   })
 
-  it('Renders a welcome message', () => {
-    const welcome = _component.find('h4')
-    expect(welcome).to.exist
-    expect(welcome.text()).to.match(/Welcome!/)
+  it('Renders LoginForm when unauthenticated', () => {
+    let component
+    let props = {
+      isAuthenticated: false,
+      dispatch: () => {}
+    }
+
+    component = shallow(
+      <HomeView {...props} />
+    )
+
+    expect(component.find(LoginForm)).to.have.lengthOf(1)
   })
 
-  it('Renders an awesome duck image', () => {
-    const duck = _component.find('img')
-    expect(duck).to.exist
-    expect(duck.attr('alt')).to.match(/This is a duck, because Redux!/)
-  })
+  
 
 })

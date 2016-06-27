@@ -1,6 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
-import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+import { CoreLayout } from 'layouts/CoreLayout/CoreLayout'
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
@@ -21,7 +21,11 @@ describe('(Layout) Core', function () {
   beforeEach(function () {
     _child = <h1 className='child'>Child</h1>
     _props = {
-      children: _child
+      children: _child,
+      toggleSidebar: () => {},
+      sidebar: false,
+      setSidebar: () => {},
+      params: {}
     }
 
     _component = shallowRenderWithProps(_props)
