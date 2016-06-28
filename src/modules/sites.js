@@ -42,9 +42,11 @@ export function fetchSites (token) {
       dispatch(receiveSites(response))
     })
     .catch(error => {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         dispatch(loginUserFailure(error))
         dispatch(push('/'))
+      } else {
+        throw error
       }
     })
   }
@@ -95,6 +97,24 @@ export const getCurSite = (state, props) => {
     return null
   }
   return site
+}
+
+export const getCurView = (state, props) => {
+  if (!state.sites ||
+      !state.sites.configs ||
+      !props.params ||
+      !props.params.siteid ||
+      !props.params.viewid) {
+    return null
+  }
+  let view = null
+  try {
+    let site = getCurSite(state, props)
+    view = site.views.find(view => {return view.id === props.params.viewid})
+  } catch (e) {
+    return null
+  }
+  return view
 }
 
 export const numSites = (state) => {

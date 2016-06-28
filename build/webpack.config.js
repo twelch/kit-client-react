@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import _debug from 'debug'
+import path from 'path'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
@@ -16,7 +17,8 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    alias: {'webworkify': 'webworkify-webpack'} // MapboxGL
   },
   module: {}
 }
@@ -136,10 +138,24 @@ webpackConfig.module.loaders = [{
       }
     }
   }
-},
-{
+}, {
   test: /\.json$/,
   loader: 'json'
+}, 
+{ // MapboxGL
+  test: /\.js$/,
+  include: path.resolve('node_modules/mapbox-gl-shaders/index.js'),
+  loader: 'transform/cacheable?brfs'
+}]
+
+// ------------------------------------
+// Postloaders
+// ------------------------------------
+// MapboxGL
+webpackConfig.module.postLoaders = [{
+  include: /node_modules\/mapbox-gl-shaders/,
+  loader: 'transform',
+  query: 'brfs'
 }]
 
 // ------------------------------------
