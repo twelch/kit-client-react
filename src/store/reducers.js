@@ -5,6 +5,7 @@ import locale from 'modules/locale'
 import auth from 'modules/auth'
 import sites from 'modules/sites'
 import sidebar from 'modules/sidebar'
+import map from 'modules/map'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -15,6 +16,7 @@ export const makeRootReducer = (asyncReducers) => {
     auth,
     sites,
     sidebar,
+    map,
     ...asyncReducers
   })
 }

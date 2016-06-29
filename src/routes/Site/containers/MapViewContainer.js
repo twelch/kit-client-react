@@ -8,6 +8,7 @@ const mapActionCreators = {}
 
 const mapStateToProps = (state, props) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  mapState: state.map,
   site: getCurSite(state, props), // Selector
   view: getCurView(state, props) // Selector
 })
