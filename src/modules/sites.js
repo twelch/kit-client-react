@@ -110,7 +110,7 @@ export const getCurView = (state, props) => {
   let view = null
   try {
     let site = getCurSite(state, props)
-    view = site.views.find(view => {return view.id === props.params.viewid})
+    view = site.views.find(view => { return view.id === props.params.viewid })
   } catch (e) {
     return null
   }
