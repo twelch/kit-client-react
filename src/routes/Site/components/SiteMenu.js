@@ -54,7 +54,7 @@ export class SiteMenu extends React.Component {
         value={index}
         leftAvatar={<Avatar icon={<PinDrop />} />}
         primaryText={view.name}
-        secondaryText={view.name}
+        secondaryText={view.description}
         style={styles.list}
       />)
     })
