@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-starter-kit",
-  "version": "3.0.0-alpha.0",
-  "description": "Get started with React, Redux, and React-Router!",
+  "name": "kit-client-react",
+  "version": "0.0.1",
+  "description": "Full map application on top of react-redux-starter-kit",
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0",
