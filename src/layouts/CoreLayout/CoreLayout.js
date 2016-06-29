@@ -34,7 +34,7 @@ class CoreLayout extends React.Component {
           <Sidebar
             params={this.props.params}
             docked={false}
-            width={250}
+            width={280}
             open={this.props.sidebar}
             onRequestChange={this.props.setSidebar} />
           {this.props.children}

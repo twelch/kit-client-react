@@ -92,7 +92,6 @@ export class Sidebar extends React.Component {
 
   signOut () {
     this.props.logout()
-    this.props.closeSidebar()
   }
 
   changeLanguage (event, locale) {
@@ -101,6 +100,7 @@ export class Sidebar extends React.Component {
 
   changeSite (event, siteid) {
     this.props.selectSite(siteid)
+    this.props.closeSidebar()
   }
 
   changeView (event, viewid) {
@@ -128,7 +128,7 @@ export class Sidebar extends React.Component {
       },
       listChild: {
         WebkitAppearance: 'none',
-        marginLeft: 20
+        marginLeft: 15
       }
     }
 
@@ -150,6 +150,7 @@ export class Sidebar extends React.Component {
                     value={siteid}
                     primaryText={sites[siteid].name}
                     style={styles.list}
+                    innerDivStyle={styles.listChild}
                     insetChildren={curSiteID !== siteid}
                     leftIcon={curSiteID === siteid ? <Done /> : null} />
                 )
@@ -178,6 +179,7 @@ export class Sidebar extends React.Component {
                     value={view.id}
                     primaryText={view.name}
                     style={styles.list}
+                    innerDivStyle={styles.listChild}
                     insetChildren={curViewID !== view.id}
                     leftIcon={curViewID === view.id ? <Done /> : null} />
                 )
@@ -231,6 +233,7 @@ export class Sidebar extends React.Component {
                   value={lang.locale}
                   primaryText={lang.name}
                   style={styles.list}
+                  innerDivStyle={styles.listChild}
                   insetChildren={locale !== lang.locale}
                   leftIcon={locale === lang.locale ? <Done /> : null} />
               )
