@@ -6,7 +6,7 @@ class MapView extends React.Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    mapState: PropTypes.object.isRequired,
+    map: PropTypes.object.isRequired,
     site: PropTypes.object,
     view: PropTypes.object
   }
@@ -23,6 +23,10 @@ class MapView extends React.Component {
     if (this.props.view.id !== nextProps.view.id) {
       this.tearDown()
       this.setup(nextProps)
+
+      if (nextProps.map.styleLoaded && nextProps.view.map.start.style !== this.props.view.map.start.style) {
+        this.map.setStyle(nextProps.view.map.start.style)
+      }
     }
   }
 
@@ -49,7 +53,7 @@ class MapView extends React.Component {
       key: view.id,
       view: view,
       getMap: this.getMap,
-      loaded: this.props.mapState.styleLoaded
+      loaded: this.props.map.styleLoaded
     })
 
     const mapStyle = {

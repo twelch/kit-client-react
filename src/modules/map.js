@@ -1,7 +1,8 @@
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const RECEIVED_STYLE = 'RECEIVE_STYLE'
+export const SETTING_STYLE = 'SETTING_STYLE'
+export const RECEIVED_STYLE = 'RECEIVED_STYLE'
 
 // ------------------------------------
 // Actions
@@ -13,7 +14,15 @@ export function receivedStyle (value = 'false') {
   }
 }
 
+export function settingStyle (value = 'false') {
+  return {
+    type: SETTING_STYLE,
+    payload: value
+  }
+}
+
 export const actions = {
+  settingStyle,
   receivedStyle
 }
 
@@ -24,6 +33,11 @@ const ACTION_HANDLERS = {
   [RECEIVED_STYLE]: (state, action) => {
     return Object.assign({}, state, {
       styleLoaded: true
+    })
+  },
+  [SETTING_STYLE]: (state, action) => {
+    return Object.assign({}, state, {
+      styleLoaded: false
     })
   }
 }

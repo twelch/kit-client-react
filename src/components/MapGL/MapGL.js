@@ -13,6 +13,7 @@ class MapGL extends Component {
     token: React.PropTypes.string.isRequired,
     // onStyleEvent fired after style loaded.  Map object is passed
     onMapLoad: React.PropTypes.func,
+    settingStyle: React.PropTypes.func,
     receivedStyle: React.PropTypes.func,
     container: React.PropTypes.string
   }
@@ -27,7 +28,7 @@ class MapGL extends Component {
 
   onStyleLoad () {
     if (this.props.onMapLoad) {
-      this.props.onMapLoad(this.map)
+      this.props.onMapLoad(this)
     }
     this.props.receivedStyle()
   }
@@ -54,6 +55,11 @@ class MapGL extends Component {
 
   componentWillUnmount () {
     this.map.remove()
+  }
+
+  setStyle (style) {
+    this.props.settingStyle()
+    this.map.setStyle(style)
   }
 
   addSource (id) { // eslint-disable-line react/sort-comp

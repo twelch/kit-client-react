@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 import MapGL from 'components/MapGL'
-import { receivedStyle } from 'modules/map'
+import { actions, settingStyle, receivedStyle } from 'modules/map'
 import {injectIntl} from 'react-intl'
 
 const mapActionCreators = {
+  actions,
+  settingStyle,
   receivedStyle
 }
 
