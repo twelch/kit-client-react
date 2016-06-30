@@ -18,6 +18,8 @@ This client kit pairs with [kit-server-hapi](https://github.com/twelch/kit-serve
 1. [Getting Started](#getting-started)
 1. [Application Structure](#application-structure)
 1. [Development](#development)
+  1. [Language Translation](#language-translation)
+  1. [Translation Architecture](#translation-architecture)
   1. [Developer Tools](#developer-tools)
   1. [Routing](#routing)
 1. [Testing](#testing)
@@ -104,12 +106,15 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   ├── main.js              # Application bootstrap and rendering
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
+|   ├── forms                # Reusable form components
 │   ├── layouts              # Components that dictate major page structure
+│   ├── modules              # redux actions, actions creators, and reducers
 │   ├── static               # Static assets (not imported anywhere in source code)
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── store                # Redux-specific pieces
 │   │   ├── createStore.js   # Create and instrument redux store
 │   │   └── reducers.js      # Reducer registry and injection
+│   │── translations         # Translation files for each registered locale
 │   └── routes               # Main route definitions and async split points
 │       ├── index.js         # Bootstrap main application routes with store
 │       ├── Root.js          # Wrapper component for context-aware providers
