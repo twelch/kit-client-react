@@ -127,15 +127,17 @@ The application structure presented in this boilerplate is **fractal**, where fu
 
 ### Language Translation
 
-When you install this kit, it comes with English, Spanish, and Chinese locales already installed.  All of the existing React components that have UI text to translate have been configured to use React-intl, and their text has already been extracted, translated, and packaged for use by the app at runtime.
+When you install this kit, it comes with English, Spanish, and Chinese locales already installed.  All of the existing React components that have UI text to translate have been configured to use React-intl, and their text has already been extracted, translated, and packaged for use by the app at runtime.  Translations are maintained with the source code.
 
 If you want to edit an existing translation:
+
 1. Find the appropriate translation file in src/translations for your locale.  If you want to change a Chinese translation, then use src/translations/zh.json.  
 2. Give this translation file to a translator along with translations/defaultMessages.json.  defaultMessages.json contain the original untranslated text strings along with a description providing context to perform the translation.
 3. Once the translations have beed added, simply replace the existing zh.json file in the codebase.
 4. Restart the dev server or recompile for production and the new translations should be picked up or appropriate warning/errors should be provided.
 
 If you want to add a new language locale:
+
 1. Add a new locale to `src/main.js` for react-intl and also to `bin/manage-translations.js` for react-intl-translations-manager
 2. Run `npm run i18n:update`.  This will generate a new json file for your new locale in src/translations.
 3. Give this translation file to a translator along with translations/defaultMessages.json.  defaultMessages.json contain the original untranslated text strings along with a description providing context to perform the translation.
@@ -144,9 +146,10 @@ If you want to add a new language locale:
 6. Restart the dev server or recompile for production and the new translations should be picked up or appropriate warning/errors should be provided.
 
 If you want to add new translations for existing locales:
+
 1. First, make sure your new text strings and the React components that contain them have been setup properly (see next section)
 2. Run `npm run i18n:update`.  This will add an entry for each new text string to the existing translations for each locale in src/translations.  The original text string will be provided by default.
-* Now follow the steps above for editing an existing translation
+  * Now follow the steps above for editing an existing translation
 
 ### Translation Architecture
 
