@@ -44,7 +44,7 @@ This client kit pairs with [kit-server-hapi](https://github.com/twelch/kit-serve
 * [karma](https://github.com/karma-runner/karma)
 * [eslint](http://eslint.org)
 
-# Added Features
+## Added Features
 * [material-ui](http://www.material-ui.com/)
 * [react-redux-jwt-auth-example](https://github.com/joshgeller/react-redux-jwt-auth-example)
 * [react-intl](https://github.com/yahoo/react-intl) with help from this [kit branch](https://github.com/juanda99/react-redux-starter-kit)
@@ -63,8 +63,10 @@ After confirming that your development environment meets the specified [requirem
 $ git clone https://github.com/davezuko/react-redux-starter-kit.git
 $ cd react-redux-starter-kit
 $ npm install                   # Install project dependencies
-$ npm start                     # Compile and launch
+$ npm run dev                   # Compile and launch
 ```
+
+Once the dev server starts successfully, navigate to http://localhost:3001 in your web browser and you should see a login page.  At this point you must start the server application and have it listening on port 3000 or provide an alternate mock backend.  You should then be able to sign in using one of the sample user accounts. Once authenticated, the client app will fetch settings for the available sites (tenants) which provides all of the information needed to drive the UI.
 
 While developing, you will probably rely mostly on `npm run dev`; however, there are additional scripts at your disposal:
 
@@ -122,6 +124,52 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ```
 
 ## Development
+
+### Language Translation
+
+When you install this kit, it comes with English, Spanish, and Chinese locales already installed.  All of the existing React components that have UI text to translate have been configured to use React-intl, and their text has already been extracted, translated, and packaged for use by the app at runtime.
+
+If you want to edit an existing translation:
+1. Find the appropriate translation file in src/translations for your locale.  If you want to change a Chinese translation, then use src/translations/zh.json.  
+2. Give this translation file to a translator along with translations/defaultMessages.json.  defaultMessages.json contain the original untranslated text strings along with a description providing context to perform the translation.
+3. Once the translations have beed added, simply replace the existing zh.json file in the codebase.
+4. Restart the dev server or recompile for production and the new translations should be picked up or appropriate warning/errors should be provided.
+
+If you want to add a new language locale:
+1. Add a new locale to `src/main.js` for react-intl and also to `bin/manage-translations.js` for react-intl-translations-manager
+2. Run `npm run i18n:update`.  This will generate a new json file for your new locale in src/translations.
+3. Give this translation file to a translator along with translations/defaultMessages.json.  defaultMessages.json contain the original untranslated text strings along with a description providing context to perform the translation.
+4. Once the translations have beed added, simply replace the existing zh.json file in the codebase.
+5. Edit src/translations/index.js, adding your new translation file import and mapping it to one or more locale strings.  Note that some browsers use different locale strings, for example Chrome may use 'en' or 'en-US' while Safari will use 'en-us'.  Map as many locales as needed to your translation file.
+6. Restart the dev server or recompile for production and the new translations should be picked up or appropriate warning/errors should be provided.
+
+If you want to add new translations for existing locales:
+1. First, make sure your new text strings and the React components that contain them have been setup properly (see next section)
+2. Run `npm run i18n:update`.  This will add an entry for each new text string to the existing translations for each locale in src/translations.  The original text string will be provided by default.
+* Now follow the steps above for editing an existing translation
+
+### Translation Architecture
+
+If you are developing new React components or changing existing ones then you will need to understand how the different pieces work together to extract, update, store, and perform translations.  This includes React-intl, Babel, and React-intl-translations-manager. The basic workflow is as follows using the login form as an example.
+
+* Initially, you will have text string literals in your React components, probably mostly in your render method.
+* These text string literals are replaced by calls to `formatMessage` and the text strings are moved to the top of the component in a standardized message structure..  See forms/LoginForm/LoginForm.js for an example.
+  * formatMessage is passed as a prop provided by React-intl which translates the text string based on the current locale.
+  * formatMessage and the current locale are passed into the component as props by React-intl.
+  * React-intl is connected to the LoginForm via the LoginContainer using the injectIntl method (src/forms/LoginForm/LoginContainer.js)
+* When you run `npm run i18n:update` Babel reads through all of your React components in the src/ folder, and any other es6 classes, and extracts the messages into src/_translations.
+  * This destination is configured in .babelrc).
+* i18n-update then runs react-intl-translations-manager which does multiple things:
+  * compiles all of the translations from src/_translations into a single master message file at src/translations/defaultMessages.json.  File is updated if it already exists.
+  * adds translation files for each locale to src/translations ready to be translated.  For example es.json for Spanish.  If these translation files already exist then they are updated, preserving the old translation.  The manager even tells you about all of the new translations needed, or old ones that have been removed.
+* The translations for all of the locales are bundled into a single module in src/translations/index.js
+  * It is here that locale strings, as specificed by the client web browser are mapped to a specific translation file.
+  * If a browser uses a locale that is not translated, then the default messages are used automatically, in this case English.
+  * There are times when you will want to have multiple locales all map to the same generic translation.  For example, in our case both 'zh' and 'zh-CN' are made to point to the zh.json translation file as they simplified Mandarin is valid in both cases.
+  * There are also cases where different browsers provide slightly different casing for locale strings.  For example the Chrome browser uses 'en-US' while Safari uses 'en-us'.  Mapping are provided for both here.
+* The translation index.js is loaded by src/containers/AppContainer and given to the React-intl provider, which performs the translation when formatMessage is called.
+  * The current locale is also provided to the React-intl provider as a property which comes from the global redux state via src/modules/locale.js.  It's in this file where the initial locale state is set by reading the browsers language list.  It also provides a localeChange action creator which components such as the sidebar use to trigger locale changes. 
+  * When a localeChange is triggered, each of the React components update themselves, using their locale property which comes from the redux state, to call formatMessage and receive the new translated message.
 
 #### Developer Tools
 
