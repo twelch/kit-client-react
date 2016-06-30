@@ -24,9 +24,7 @@ const mapActionCreators = {
   localeChange
 }
 
-let IntlSidebar = injectIntl(Sidebar)
-
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
   mapActionCreators
-)(IntlSidebar)
+)(Sidebar))
