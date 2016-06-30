@@ -60,8 +60,7 @@ This client kit pairs with [kit-server-hapi](https://github.com/twelch/kit-serve
 After confirming that your development environment meets the specified [requirements](#requirements), cloning this repository, and navigating on the command line to the top-level directory you can follow these steps to get up and running:
 
 ```bash
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git
-$ cd react-redux-starter-kit
+$ cd into top-level directory
 $ npm install                   # Install project dependencies
 $ npm run dev                   # Compile and launch
 ```
