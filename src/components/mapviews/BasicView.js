@@ -9,8 +9,10 @@ class BasicView extends React.Component {
   }
 
   componentDidMount () {
-    this.map = this.props.getMap()
-    if (this.props.loaded && !this.started) {
+    if (!this.map) {
+      this.map = this.props.getMap()
+    }
+    if (this.map && this.props.loaded && !this.started) {
       this.start(this.props.view)
     }
   }
