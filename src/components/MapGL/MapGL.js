@@ -43,18 +43,25 @@ class MapGL extends Component {
     this.map.on('style.load', this.onStyleLoad)
   }
 
-  componentDidUpdate () {
-    if (this.props.baselayer === 'satellite' && this.curBase !== this.props.baselayer) {
-      this.showLayer('satellite')
-      this.curBase = this.props.baselayer
-    } else if (this.props.baselayer !== 'satellite' && this.curBase === 'satellite') {
-      this.hideLayer('satellite')
-      this.curBase = this.props.baselayer
+  componentWillReceiveProps (nextProps) {
+    if (this.props.intl.locale != nextProps.intl.locale) {
+      this.changeLanguage(nextProps.intl.locale)
     }
+  }
+
+  componentDidUpdate () {
+
   }
 
   componentWillUnmount () {
     this.map.remove()
+  }
+
+  changeLanguage (locale) {
+    const labelLayers = Object.keys(this.map.style._layers).filter(name => { return name.indexOf('label') !== -1 })
+    labelLayers.forEach(layername => {
+      this.map.setLayoutProperty(layername, 'text-field', '{name_' + locale + '}')
+    })  
   }
 
   setStyle (style) {
